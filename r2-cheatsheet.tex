@@ -1,0 +1,332 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[bookmarks=true,colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black]{hyperref}
+\usepackage{multicol}
+\usepackage{geometry}
+\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm}
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+\setcounter{secnumdepth}{0} % Don't print section numbers
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+\begin{document}
+%\raggedright
+\footnotesize
+\begin{multicols*}{3}
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{Reversing with Radare2}} \\
+\end{center}
+
+\section{Starting Radare}
+The basic usage is \texttt{radare2} \textit{executable} (on some systems you can
+use \texttt{r2} instead of \texttt{radare2}); if you want to run radare2 without
+opening any file, you can use \texttt{--} instead of an executable name.
+
+Some command-line options are:
+
+\begin{tabular}{@{}ll@{}}
+\texttt{-d} \textit{file}$|$\textit{pid} & debug executable \textit{file} or process \textit{pid} \\
+\texttt{-A}	& analyze all referenced code (\texttt{aaa} command) \\
+\texttt{-R} \textit{profile}\texttt{.rr2} & specifies \texttt{rarun2} profile (same as \\ & \texttt{-e dbg.profile=}\textit{profile}\texttt{.rr2}) \\
+\texttt{-w}	& open file in write mode \\
+\texttt{-p} \textit{prj} & use project \textit{prj} \\
+\texttt{-p} & list projects \\
+\texttt{-h} & show help message (\texttt{-hh} the verbose one)
+\end{tabular}
+
+Example: \texttt{r2 -dA /bin/ls}
+
+\section{General information}
+The command \texttt{?} prints the help. Command names are hierarchically defined; for instance, all \textbf{p}rinting commands start with \texttt{p}. So, to understand what a command does, you can append \texttt{?} to a \emph{prefix} of such a command; for instance, to learn what \texttt{pdf} does, you can first try \texttt{pd?}, then the more general \texttt{p?}.
+
+Single-line comments can be entered using \texttt{\#}; e.g. \texttt{s \# where R we?}.
+
+Command \texttt{?} can also be used to evaluate an expression and print its result in various format; e.g. \texttt{? 5 * 8 + 2} (note the space between \texttt{?} and the expression).
+
+Where an address \textit{addx} is expected, you can provide any expression that evaluates to an address,
+e.g. a function name or a register name. In this cheatsheet we sometimes use \textit{fn-name}, instead of \textit{addx}, to emphasize that the argument is supposed to be a function starting address.
+
+All commands that:
+\begin{itemize}
+\item accept an optional size (e.g. \texttt{pd}), use the current block size by default (see: \texttt{b})
+\item accept an optional address (e.g., \texttt{pdf}), use the current position by default (see: \texttt{s})
+\end{itemize}
+
+\subsection{Internal grep-like filtering}
+You can filter command output by appending \texttt{\textasciitilde{}}[\texttt{!}]\textit{str}, to display only rows [not] containing string \textit{str}; e.g. \texttt{pdf\textasciitilde{}rdx} and \texttt{pdf\textasciitilde{}!rdx}. You can further filter by appending
+
+\begin{tabular}{@{}ll@{}}
+\texttt{:}\textit{r}	& to display row \textit{r} ($0\le r < \#\mathit{rows}$ or, backwards \\ & with: $-\#\mathit{rows}\le r \le -1)$ \\
+\texttt{[}\textit{c}\texttt{]}	& to display column \textit{c} ($0\le c < \#\mathit{cols}$) \\
+\texttt{:r[}\textit{c}\texttt{]}	& to display column \textit{c} of row $r$
+\end{tabular}
+
+Examples: \texttt{afl\textasciitilde{}[0]}, \texttt{afl\textasciitilde{}malloc[0]}, \texttt{pdf\textasciitilde{}:2} and \texttt{pdf\textasciitilde{}mov:2}
+
+\subsection{Shell interaction}
+Command output can be redirected to a file by appending \texttt{>}\textit{filename}
+or piped to an external command with \texttt{|}\textit{progname} [\textit{args}].
+Examples: \texttt{afl > all\_functions} and \texttt{afl | wc -l}.
+
+External commands can be run with \texttt{!}\textit{progname} [\textit{args}].
+
+The output of external programs can be used as arguments for internal commands by using back-ticks to enclose the invocation of external commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
+
+\subsection{Python scripting}
+Assuming that Python extension has been installed (\texttt{\#!} lists installed extensions)
+an, interactive Python interpreter can be spawned with \texttt{\#!python} and a script can
+be run with \texttt{\#!python }\textit{script-filename}.
+
+Inside the spawned interpreter \texttt{r2} is an \emph{r2pipe} object that can be used to interact with
+the same instance of Radare, by invoking method \texttt{cmd}; e.g. \texttt{print(r2.cmd('pdf @ entry0'))}.
+
+In a script the same behaviour can be obtained by \texttt{import}ing \texttt{r2pipe} and inizializing \texttt{r2} with \texttt{r2pipe.open("\#!pipe")}.
+
+You can make most Radare2 commands output in JSON format by appending a \texttt{j}; e.g. \texttt{pdfj} (instead of \texttt{pdf}).
+
+Method \texttt{cmdj} can de-serialize JSON output into Python objects; e.g. \texttt{f = r2.cmdj('pdfj @ entry0')} \\ \texttt{print f['name'], f['addr'], f['ops'][0]['opcode']}
+
+\subsection{Configuration}
+\begin{tabular}{@{}ll@{}}
+\texttt{e??} & list all variable names and descriptions \\
+\texttt{e?}[\texttt{?}] \textit{var-name} & show description of \textit{var-name}\\
+\texttt{e} \textit{var-name} & show the value of \textit{var-name} \\
+\texttt{e} & show the value of all variables \\
+\texttt{eco} \textit{theme-name} & select theme; eg. \texttt{eco solarized} \\
+\texttt{eco} & list available themes \\
+\texttt{b} & display current block size \\
+\texttt{b} \textit{size} & set block size \\
+\texttt{env} [\textit{name} [\texttt{=}\textit{value}]] & get/set environment variables \\
+\end{tabular}
+\subsubsection{Some variables}
+\begin{tabular}{@{}ll@{}}
+\texttt{asm.emu} & run ESIL emulation analysis on disasm \\
+\texttt{asm.pseudo} & enable pseudo-code syntax \\ & (in visual mode, switch with: \texttt{\$}) \\
+\texttt{asm.bytes} & display bytes of each instruction \\
+\texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
+\texttt{asm.cmtright} & comments at right of disassembly if they fit \\
+\texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
+\texttt{dbg.follow.child} & continue tracing the child process on fork \\
+\texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
+\end{tabular}
+\subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
+\begin{verbatim}
+e asm.bytes=0
+e scr.utf8=true
+e asm.cmtright=true
+e cmd.stack=px 32
+eco solarized
+\end{verbatim}
+
+\section{Searching: \texttt{/}}
+\begin{tabular}{@{}ll@{}}
+\texttt{/ \textit{str}} & search for string \textit{str} \\
+\texttt{/x \textit{hstr}} & search for hex-string \textit{hstr} \\
+\texttt{/a \textit{asm-instr}} & assemble instruction and search for its bytes \\
+\texttt{/R }\textit{opcode} & find ROP gadgets containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
+\end{tabular}
+
+\emph{a lot} of other commands\ldots TODO!
+
+Also: \texttt{e??search} for options
+
+\section{Seeking: \texttt{s}}
+\begin{tabular}{@{}ll@{}}
+\texttt{s} & print current position/address \\
+\texttt{s} \textit{addx} & seek to \textit{addx} \\
+\texttt{s+} \textit{n} & seek \textit{n} bytes forward \\
+\texttt{s++} & seek block-size bytes forward \\
+\texttt{s-} \textit{n} & seek \textit{n} bytes backward \\
+\texttt{s--} & seek block-size bytes backward \\
+\texttt{s-} & undo seek \\
+\texttt{s+} & redo seek \\
+\texttt{s=} & list seek history \\
+\texttt{s*} & list seek history as r2-commands \\
+\end{tabular}
+
+\section{Analysis (functions and syscalls): \texttt{a}}
+\begin{tabular}{@{}ll@{}}
+\texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
+\texttt{afl} & list functions \\
+\texttt{afll} & list functions with details \\
+\texttt{afi} \textit{fn-name}$|$\textit{addx} & show verbose info for \textit{fn-name} \\
+\texttt{afn} \textit{new-name} \textit{addx} & name function at address \textit{addx} \\
+\texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
+\texttt{asl} & list syscalls \\
+\texttt{asl} \textit{name} & display syscall-number for \textit{name} \\
+\texttt{asl} \textit{n} & display name of syscall number \textit{n} \\
+\texttt{afvd} \textit{var-name} & output r2 command for displaying the \\ & address and value of arg/local \textit{var-name} \\
+\texttt{.afvd} \textit{var-name} & display address and value of \textit{var-name} \\
+\texttt{afvn} \textit{name} \textit{new-name} & rename argument/local variable \\
+\texttt{afvt} \textit{name} \textit{type} & change type for given argument/local \\
+\texttt{axt} \textit{addx} & find data/code references to \textit{addx} \\
+\end{tabular}
+
+\section{Information: \texttt{i}}
+\begin{tabular}{@{}ll@{}}
+\texttt{i} & show info of current file \\
+\texttt{ie} & entrypoint \\
+\texttt{iz} & strings in data sections \\
+\texttt{izz} & strings in the whole binary \\
+\texttt{ii} & imports \\
+\texttt{iS} & sections \\
+\end{tabular}
+
+\section{Printing: \texttt{p}}
+\begin{tabular}{@{}ll@{}}
+\texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
+\texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print \textit{n} bytes (or block-size), as words, with \\ & references to flags and code (telescoping) at \\ & \textit{addx} (or current position)\\
+\texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump \\
+\texttt{pxh} \ldots & hexdump half-words (16 bits) \\
+\texttt{pxw} \ldots & hexdump words (32 bits) \\
+\texttt{pxq} \ldots & hexdump quad-words (64 bits) \\
+\texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
+\texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (for help, in gdb: \texttt{help x} \\ & i.e., from r2: \texttt{!gdb -q -ex 'help x' -ex quit}) \\
+\texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
+\texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
+\texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
+\texttt{pdf} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & disassemble function \textit{fn-name}/at address \textit{addx}
+\end{tabular}
+
+\section{Debugging: \texttt{d}}
+\begin{tabular}{@{}ll@{}}
+\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\ & BUG (?): this doesn't work on Windows \\
+\texttt{dc} & continue (or start) execution \\
+\texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
+\texttt{dcs} [\textit{name}] & continue until the next syscall (named \textit{name}, \\ & if specified) \\
+\texttt{dcr} & continue until ret (uses step over) \\
+\texttt{dr=} & show general-purpose regs and their values \\
+\texttt{dro} & show previous (old) values of registers \\
+\texttt{drr} & show register references (telescoping) \\
+\texttt{dr} \textit{reg-name} \texttt{=} \textit{value} & set register value \\
+\texttt{drt} & list register types \\
+\texttt{drt} \textit{type} & list registers of type \textit{type} and their values \\
+\texttt{db} & list breakpoints \\
+\texttt{db }\textit{addx} & add breakpoint \\
+\texttt{db -}\textit{addx} & remove breakpoint \\
+\texttt{doo \textit{args}} & (re)start debugging \\
+\texttt{ood} & synonym for \texttt{doo} \\
+\texttt{ds} & step into \\
+\texttt{dso} & step over \\
+\texttt{dbt} & display backtrace \\
+\texttt{drx} & hardware breakpoints \\
+\texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
+\texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
+\end{tabular}
+
+\section{Types: \texttt{t}}
+\begin{tabular}{@{}ll@{}}
+\texttt{"td\ }\textit{C-type-def}\texttt{"} & define a new type \\
+\texttt{t} \textit{t-name} & show type \textit{t-name} in \texttt{pf} syntax \\
+\texttt{.t }\textit{t-name} \texttt{@} \textit{addx} & display the value (of type \textit{t-name}) at \textit{addx} \\
+\texttt{t} & list (base?) types \\
+\texttt{te} & list enums \\
+\texttt{ts} & list structs \\
+\texttt{tu} & list unions \\
+\texttt{to} \textit{file} & parse type information from C header file \\
+\texttt{tl} \textit{t-name} & link \textit{t-name} to current address \\
+\texttt{tl} \textit{t-name} \texttt{=} \textit{addx} & link \textit{t-name} to address \textit{addx} \\
+\texttt{tl} & list all links in readable format \\
+\end{tabular}
+
+\section{Visual mode: \texttt{V}}
+Command \texttt{V} enters \emph{visual mode}.
+
+\begin{tabular}{@{}ll@{}}
+\texttt{q} & exit visual-mode \\
+\texttt{c} & cursor-mode, \textit{tab} switches among stack/regs/disassembly \\
+\texttt{:} & execute a normal-mode command; e.g. \texttt{:dm} \\
+\texttt{p} and \texttt{P} & rotate forward/backward print modes \\
+\texttt{/}\textit{str} & highlight occurences of string \textit{str} \\
+\texttt{\$} & toggle pseudo-syntax \\
+\texttt{O} & toggle ESIL-asm \\
+\texttt{;} & add/remove comments (to current offset) \\
+\texttt{x} & browse xrefs-to current offset \\
+\texttt{X} & browse xrefs-from current function \\
+\texttt{\_} & browse flags \\
+\texttt{d} & define \texttt{f}unction, \texttt{e}nd-function, \texttt{r}ename, \ldots \\
+\texttt{V} & enter block-graph viewer \\
+\texttt{A} & enter visual-assembler \\
+\end{tabular}
+\subsection{Seeking (in Visual Mode)}
+\begin{tabular}{@{}ll@{}}
+\texttt{.} & seeks to program counter \\
+\textit{Enter} & on jump/call instructions, follow target address \\
+\texttt{u} & undo \\
+\texttt{U} & redo \\
+\texttt{o} & go/seek to given offset \\
+\textit{d} (a digit) & jump to the target marked \texttt{[}\textit{d}\texttt{]} \\
+\texttt{m}\textit{l} (a letter) & mark the spot with letter \textit{l} \\
+\texttt{'}\textit{l} & jump to mark \textit{l} \\
+\texttt{n} & jump to next function \\
+\texttt{N} & jump to previous function
+\end{tabular}
+\subsection{Debugging (in Visual Mode)}
+\begin{tabular}{@{}ll@{}}
+\texttt{b} or \texttt{F2} & toggle breakpoint \\
+\texttt{F4} & run to cursor \\
+\texttt{s} or \texttt{F7} & step-into \\
+\texttt{S} or \texttt{F8} & step-over \\
+\texttt{F9} & continue \\
+\end{tabular}
+
+\section{Flags: \texttt{f}}
+TODO
+
+\section{Comments: \texttt{C}}
+TODO
+
+\section{Writing: \texttt{w}}
+\begin{tabular}{@{}ll@{}}
+\texttt{wa} \textit{asm-instr} & assemble and write opcodes; for more instructions \\ &
+	the whole command must be quoted: \\ &
+\texttt{"wa} \textit{asm-instr$_1$}\texttt{;} \textit{asm-instr$_2$}\texttt{;} \ldots\texttt{"} \\
+\end{tabular}
+
+\section{Projects: \texttt{P}}
+TODO
+
+\section{Running in different environments: rarun2}
+\texttt{rarun2} is used as a launcher for running programs with different environment,
+arguments, permissions, directories and overridden default file-descriptors.
+Usage:
+
+\texttt{rarun2} [\texttt{-t}$|$\textit{script-name}\texttt{.rr2}] [\textit{directives}] [\texttt{--}] [\textit{prog-name}] [\textit{args}]
+
+\texttt{rarun2 -t} shows the terminal name, say $\alpha$, and wait for a connection from another process. For instance, from another terminal, you can execute \texttt{rarun2 stdio=$\alpha$ program=/bin/sh} (use \texttt{stdin}/\texttt{stdout} to redirect one stream only).
+
+rarun2 supports \emph{a lot} of directives, see the man page.
+
+
+\rule{1.0\linewidth}{0.25pt}
+\scriptsize
+Copyright \copyright 2017 by zxgio
+
+This cheat-sheet may be freely distributed under the terms of the GNU
+General Public License; the latest version can be found at: \\
+\url{https://github.com/zxgio/r2-cheatsheet/}
+\end{multicols*}
+\end{document}
