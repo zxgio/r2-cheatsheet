@@ -73,7 +73,7 @@ Command \texttt{?} can also be used to evaluate an expression and print its resu
 \end{tabular}
 
 Where an address \textit{addx} is expected, you can provide any expression that evaluates to an address,
-e.g. a function name or a register name. In this cheatsheet we sometimes use \textit{fn-name}, instead of \textit{addx}, to emphasize that the argument is supposed to be a function starting address.
+e.g. a function name or a register name. In this cheatsheet we sometimes use \textit{fn-name}, instead of \textit{addx}, to emphasize that the argument is supposed to be a function starting address. As default address is (usually?) used the current seek: \texttt{\$\$}.
 
 All commands that:
 \begin{itemize}
@@ -186,7 +186,7 @@ Also: \texttt{e??search} for options
 \texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
 \texttt{afl} & list functions \\
 \texttt{afll} & list functions with details \\
-\texttt{afi} \textit{fn-name}$|$\textit{addx} & show verbose info for \textit{fn-name} \\
+\texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
 \texttt{afn} \textit{new-name} \textit{addx} & name function at address \textit{addx} \\
 \texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
 \texttt{asl} & list syscalls \\
@@ -228,8 +228,8 @@ Also: \texttt{e??search} for options
 \texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
 \texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
 \texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
-\texttt{pdf} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & disassemble function \textit{fn-name}/at \textit{addx} \\
-\texttt{pdc} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & pseudo-disassemble in C-like syntax
+\texttt{pdf} [\texttt{@} \textit{fn-name}] & disassemble function \textit{fn-name} \\
+\texttt{pdc} [\texttt{@} \textit{fn-name}] & pseudo-disassemble in C-like syntax
 \end{tabular}
 
 \section{Debugging: \texttt{d}}
