@@ -64,7 +64,13 @@ The command \texttt{?} prints the help. Command names are hierarchically defined
 
 Single-line comments can be entered using \texttt{\#}; e.g. \texttt{s \# where R we?}.
 
-Command \texttt{?} can also be used to evaluate an expression and print its result in various format; e.g. \texttt{? 5 * 8 + 2} (note the space between \texttt{?} and the expression).
+Command \texttt{?} can also be used to evaluate an expression and print its result in various format; e.g. \texttt{? 5 * 8 + 2} (note the space between \texttt{?} and the expression).  There are also some special \texttt{\$}-variables
+(list all of them with: \texttt{?\$?}):
+
+\begin{tabular}{@{}ll@{}}
+\texttt{\$\$} & current virtual seek \\
+\texttt{\$b} & 	block size \\
+\end{tabular}
 
 Where an address \textit{addx} is expected, you can provide any expression that evaluates to an address,
 e.g. a function name or a register name. In this cheatsheet we sometimes use \textit{fn-name}, instead of \textit{addx}, to emphasize that the argument is supposed to be a function starting address.
@@ -191,6 +197,12 @@ Also: \texttt{e??search} for options
 \texttt{afvn} \textit{name} \textit{new-name} & rename argument/local variable \\
 \texttt{afvt} \textit{name} \textit{type} & change type for given argument/local \\
 \texttt{axt} \textit{addx} & find data/code references to \textit{addx} \\
+\end{tabular}
+\subsection{Graphviz/graph code: \texttt{ag}}
+\begin{tabular}{@{}ll@{}}
+\texttt{ag} \textit{addr} & output graphviz code (BB at \textit{addr} and children) \\ &  E.g. view the function graph with: \texttt{ag \$\$ | xdot -} \\
+\texttt{agc} \textit{addr} & callgraph of function at \textit{addx} \\
+\texttt{agC} & full program callgraph \\
 \end{tabular}
 
 \section{Information: \texttt{i}}
