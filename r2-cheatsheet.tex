@@ -91,7 +91,8 @@ Command output can be redirected to a file by appending \texttt{>}\textit{filena
 or piped to an external command with \texttt{|}\textit{progname} [\textit{args}].
 Examples: \texttt{afl > all\_functions} and \texttt{afl | wc -l}.
 
-External commands can be run with \texttt{!}\textit{progname} [\textit{args}].
+External commands can be run with \texttt{!!}\textit{progname} [\textit{args}].
+Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
 
 The output of external programs can be used as arguments for internal commands by using back-ticks to enclose the invocation of external commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
 
@@ -211,11 +212,12 @@ Also: \texttt{e??search} for options
 \texttt{pxw} \ldots & hexdump words (32 bits) \\
 \texttt{pxq} \ldots & hexdump quad-words (64 bits) \\
 \texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
-\texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (for help, in gdb: \texttt{help x} \\ & i.e., from r2: \texttt{!gdb -q -ex 'help x' -ex quit}) \\
+\texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (in gdb see: \texttt{help x} \\ & from r2: \texttt{!!gdb -q -ex 'help x' -ex quit}) \\
 \texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
 \texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
 \texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
-\texttt{pdf} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & disassemble function \textit{fn-name}/at address \textit{addx}
+\texttt{pdf} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & disassemble function \textit{fn-name}/at \textit{addx} \\
+\texttt{pdc} [\texttt{@} \textit{fn-name}$|$\textit{addx}] & pseudo-disassemble in C-like syntax
 \end{tabular}
 
 \section{Debugging: \texttt{d}}
