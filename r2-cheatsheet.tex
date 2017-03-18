@@ -123,14 +123,21 @@ Method \texttt{cmdj} can de-serialize JSON output into Python objects; e.g. \tex
 \end{tabular}
 \subsubsection{Some variables}
 \begin{tabular}{@{}ll@{}}
-\texttt{asm.emu} & run ESIL emulation analysis on disasm \\
-\texttt{asm.pseudo} & enable pseudo-code syntax \\ & (in visual mode, switch with: \texttt{\$}) \\
+\texttt{asm.pseudo} & enable pseudo-code syntax \\ & (in visual mode, toggle with: \texttt{\$}) \\
 \texttt{asm.bytes} & display bytes of each instruction \\
-\texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
 \texttt{asm.cmtright} & comments at right of disassembly if they fit \\
+\texttt{asm.emu} & run ESIL emulation analysis on disasm \\
+\texttt{asm.demangle} & Show demangled symbols in disasm \\
+\\
+\texttt{bin.demangle} & Import demangled symbols from RBin \\
+\\
 \texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
+\\
 \texttt{dbg.follow.child} & continue tracing the child process on fork \\
+\\
 \texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
+\\
+\texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
 \end{tabular}
 \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
 \begin{verbatim}

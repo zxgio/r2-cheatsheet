@@ -178,3 +178,7 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
+
+# Vim
+*.swp
+
