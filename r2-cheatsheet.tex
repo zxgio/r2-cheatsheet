@@ -318,7 +318,14 @@ Command \texttt{V} enters \emph{visual mode}.
 TODO
 
 \section{Comments: \texttt{C}}
-TODO
+\begin{tabular}{@{}ll@{}}
+\texttt{CC} & list all comments in human friendly form \\
+\texttt{CCu} \textit{text} [\texttt{@} \textit{addx}] & set (update?) comment \textit{text} at \textit{addx} \\
+\texttt{CC} \textit{text} [\texttt{@} \textit{addx}] & append comment \textit{text} at \textit{addx} \\
+\texttt{CC-} [\texttt{@} \textit{addx}] & remove comment at \textit{addx} \\
+\texttt{CC.} [\texttt{@} \textit{addx}] & show comment at \textit{addx} \\
+\texttt{CC!} [\texttt{@} \textit{addx}] & edit comment using \texttt{cfg.editor} (vim, \ldots) \\
+\end{tabular}
 
 \section{Writing: \texttt{w}}
 \begin{tabular}{@{}ll@{}}
