@@ -314,8 +314,13 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{F9} & continue \\
 \end{tabular}
 
-\section{Flags: \texttt{f}}
-TODO
+\section{Flags (AKA ``bookmarks''): \texttt{f}}
+\begin{tabular}{@{}ll@{}}
+\texttt{f} \textit{name} \texttt{@} \textit{addx} & \emph{or}\\
+\texttt{f} \textit{name} \texttt{=} \textit{addx} & associate name \textit{name} to address \textit{addx} \\
+\texttt{f- @} \textit{addx} & remove the association at address \textit{addx} \\
+\texttt{f-} \textit{name} & remove the association with name \textit{name} \\
+\end{tabular}
 
 \section{Comments: \texttt{C}}
 \begin{tabular}{@{}ll@{}}
@@ -335,7 +340,13 @@ TODO
 \end{tabular}
 
 \section{Projects: \texttt{P}}
-TODO
+\begin{tabular}{@{}ll@{}}
+\texttt{Pl} & list all projects \\
+\texttt{Ps} [\textit{prj-name}] & save project \textit{prj-name} \\
+\texttt{Po} \textit{prj-name} & open project \textit{prj-name} \\
+\texttt{Pd} \textit{prj-name} & delete project \textit{prj-name} \\
+\end{tabular}
+
 
 \section{Running in different environments: rarun2}
 \texttt{rarun2} is used as a launcher for running programs with different environment,
