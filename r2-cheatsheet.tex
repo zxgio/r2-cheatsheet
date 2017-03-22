@@ -181,6 +181,13 @@ Also: \texttt{e??search} for options
 \texttt{s*} & list seek history as r2-commands \\
 \end{tabular}
 
+\section{Writing: \texttt{w}}
+\begin{tabular}{@{}ll@{}}
+\texttt{wa} \textit{asm-instr} & assemble and write opcodes; for more instructions \\ &
+	the whole command must be quoted: \\ &
+\texttt{"wa} \textit{asm-instr$_1$}\texttt{;} \textit{asm-instr$_2$}\texttt{;} \ldots\texttt{"} \\
+\end{tabular}
+
 \section{Analysis (functions and syscalls): \texttt{a}}
 \begin{tabular}{@{}ll@{}}
 \texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
@@ -332,13 +339,6 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{CC!} [\texttt{@} \textit{addx}] & edit comment using \texttt{cfg.editor} (vim, \ldots) \\
 \end{tabular}
 
-\section{Writing: \texttt{w}}
-\begin{tabular}{@{}ll@{}}
-\texttt{wa} \textit{asm-instr} & assemble and write opcodes; for more instructions \\ &
-	the whole command must be quoted: \\ &
-\texttt{"wa} \textit{asm-instr$_1$}\texttt{;} \textit{asm-instr$_2$}\texttt{;} \ldots\texttt{"} \\
-\end{tabular}
-
 \section{Projects: \texttt{P}}
 \begin{tabular}{@{}ll@{}}
 \texttt{Pl} & list all projects \\
@@ -346,7 +346,6 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{Po} \textit{prj-name} & open project \textit{prj-name} \\
 \texttt{Pd} \textit{prj-name} & delete project \textit{prj-name} \\
 \end{tabular}
-
 
 \section{Running in different environments: rarun2}
 \texttt{rarun2} is used as a launcher for running programs with different environment,
