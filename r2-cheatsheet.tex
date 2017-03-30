@@ -163,8 +163,6 @@ eco solarized
 \texttt{/R }\textit{opcode} & find ROP gadgets containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
 \end{tabular}
 
-\emph{a lot} of other commands\ldots TODO!
-
 Also: \texttt{e??search} for options
 
 \section{Seeking: \texttt{s}}
@@ -218,6 +216,7 @@ Also: \texttt{e??search} for options
 \texttt{ie} & entrypoint \\
 \texttt{iz} & strings in data sections \\
 \texttt{izz} & strings in the whole binary \\
+\texttt{il} & libraries \\
 \texttt{ii} & imports \\
 \texttt{iS} & sections \\
 \end{tabular}
@@ -262,6 +261,7 @@ Also: \texttt{e??search} for options
 \texttt{dbt} & display backtrace \\
 \texttt{drx} & hardware breakpoints \\
 \texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
+%\texttt{dmi} & list library symbols \\
 \texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
 \end{tabular}
 
@@ -361,7 +361,7 @@ rarun2 supports \emph{a lot} of directives, see the man page.
 
 \rule{1.0\linewidth}{0.25pt}
 \scriptsize
-Copyright \copyright 2017 by zxgio
+Copyright \copyright 2017 by zxgio; cheat-sheet built on \today
 
 This cheat-sheet may be freely distributed under the terms of the GNU
 General Public License; the latest version can be found at: \\
