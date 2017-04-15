@@ -145,6 +145,7 @@ Method \texttt{cmdj} can de-serialize JSON output into Python objects; e.g. \tex
 \texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
 \\
 \texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
+\texttt{scr.nkey} & select seek mode (fun, hit, flag); affects commands \\ & \texttt{n} and \texttt{N} during visual mode \\
 \end{tabular}
 \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
 \begin{verbatim}
@@ -240,7 +241,8 @@ Also: \texttt{e??search} for options
 
 \section{Debugging: \texttt{d}}
 \begin{tabular}{@{}ll@{}}
-\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\ & BUG (?): this doesn't work on Windows \\
+\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\
+% & BUG (?): this doesn't work on Windows \\
 \texttt{dc} & continue (or start) execution \\
 \texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
 \texttt{dcs} [\textit{name}] & continue until the next syscall (named \textit{name}, \\ & if specified) \\
@@ -298,6 +300,7 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{d} & define \texttt{f}unction, \texttt{e}nd-function, \texttt{r}ename, \ldots \\
 \texttt{V} & enter block-graph viewer \\
 \texttt{A} & enter visual-assembler \\
+\texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
 \end{tabular}
 \subsection{Seeking (in Visual Mode)}
 \begin{tabular}{@{}ll@{}}
