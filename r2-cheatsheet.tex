@@ -146,6 +146,7 @@ Method \texttt{cmdj} can de-serialize JSON output into Python objects; e.g. \tex
 \\
 \texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
 \texttt{scr.nkey} & select seek mode (fun, hit, flag); affects commands \\ & \texttt{n} and \texttt{N} during visual mode \\
+\texttt{scr.wheel} & enables mouse-wheel in visual mode \\
 \end{tabular}
 \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
 \begin{verbatim}
@@ -153,6 +154,7 @@ e asm.bytes=0
 e scr.utf8=true
 e asm.cmtright=true
 e cmd.stack=px 32
+e scr.wheel=false
 eco solarized
 \end{verbatim}
 
