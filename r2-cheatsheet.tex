@@ -110,7 +110,7 @@ be run with \texttt{\#!python }\textit{script-filename}.
 Inside the spawned interpreter \texttt{r2} is an \emph{r2pipe} object that can be used to interact with
 the same instance of Radare, by invoking method \texttt{cmd}; e.g. \texttt{print(r2.cmd('pdf @ entry0'))}.
 
-In a script the same behaviour can be obtained by \texttt{import}ing \texttt{r2pipe} and inizializing \texttt{r2} with \texttt{r2pipe.open("\#!pipe")}.
+In a script, and inside any Python interpreter (in)directly run with \texttt{\#!pipe}\textit{\ cmd}, the same behaviour can be obtained by \texttt{import}ing \texttt{r2pipe} and inizializing \texttt{r2} with \texttt{r2pipe.open("\#!pipe")}.
 
 You can make most Radare2 commands output in JSON format by appending a \texttt{j}; e.g. \texttt{pdfj} (instead of \texttt{pdf}).
 
