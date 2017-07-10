@@ -100,7 +100,15 @@ Examples: \texttt{afl > all\_functions} and \texttt{afl | wc -l}.
 External commands can be run with \texttt{!!}\textit{progname} [\textit{args}].
 Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
 
+External commands can also be run with \texttt{\#!pipe}, see below in \emph{Python scripting}.
+
 The output of external programs can be used as arguments for internal commands by using back-ticks to enclose the invocation of external commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
+
+\subsection{Radare scripting}
+\begin{tabular}{@{}ll@{}}
+\texttt{.} \textit{filename} & interpret r2 script \textit{filename} \\
+\texttt{.!} \textit{command} & interpret output of \textit{command} as r2 commands \\
+\end{tabular}
 
 \subsection{Python scripting}
 Assuming that Python extension has been installed (\texttt{\#!} lists installed extensions)
