@@ -50,7 +50,10 @@ opening any file, you can use \texttt{--} instead of an executable name.
 Some command-line options are:
 
 \begin{tabular}{@{}ll@{}}
-\texttt{-d} \textit{file}$|$\textit{pid} & debug executable \textit{file} or process \textit{pid} \\
+\texttt{-d} \textit{file} & debug executable \textit{file} \\
+	& \emph{Warning:} if there exists a script named \textit{file}\texttt{.r2}, \\
+	& then it gets executed after the others rc-files \\
+\texttt{-d} \textit{pid} & debug process \textit{pid} \\
 \texttt{-A}	& analyze all referenced code (\texttt{aaa} command) \\
 \texttt{-R} \textit{profile}\texttt{.rr2} & specifies \texttt{rarun2} profile (same as \\ & \texttt{-e dbg.profile=}\textit{profile}\texttt{.rr2}) \\
 \texttt{-w}	& open file in write mode \\
