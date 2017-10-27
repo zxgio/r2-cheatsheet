@@ -119,19 +119,32 @@ The output of external programs can be used as arguments for internal commands b
 \texttt{.!} \textit{command} & interpret output of \textit{command} as r2 commands \\
 \end{tabular}
 
-\subsection{Python scripting}
-Assuming that Python extension has been installed (\texttt{\#!} lists installed extensions)
-an, interactive Python interpreter can be spawned with \texttt{\#!python} and a script can
-be run with \texttt{\#!python }\textit{script-filename}.
+\subsection{Python scripting (via r2pipe)}
+You can script Radare2 with Python, by leveraging \emph{r2pipe}, that can be easily installed (inside any Python 2 virtual environment)
+with: \\ \texttt{pip install r2pipe}.
 
-Inside the spawned interpreter \texttt{r2} is an \emph{r2pipe} object that can be used to interact with
-the same instance of Radare, by invoking method \texttt{cmd}; e.g. \texttt{print(r2.cmd('pdf @ entry0'))}.
+Then, you can spawn a Python interpreter, from inside r2, with: \\
+\texttt{\#!pipe python} [\textit{python-file}] \\
+or simply: \\
+\texttt{\#.} \textit{python-file}
 
-In a script, and inside any Python interpreter (in)directly run with \texttt{\#!pipe}\textit{\ cmd}, the same behaviour can be obtained by \texttt{import}ing \texttt{r2pipe} and inizializing \texttt{r2} with \texttt{r2pipe.open("\#!pipe")}.
+Once you are in Python-world, you can connect to r2 by \texttt{import}ing \texttt{r2pipe} and inizializing some variable,
+say \texttt{r2}, with \texttt{r2pipe.open("\#!pipe")}, or simply \texttt{r2pipe.open()}.
+
+Then you can interact with Radare by invoking method \texttt{cmd}; e.g. \texttt{print(r2.cmd('pdf @ entry0'))}.
 
 You can make most Radare2 commands output in JSON format by appending a \texttt{j}; e.g. \texttt{pdfj} (instead of \texttt{pdf}).
 
 Method \texttt{cmdj} can de-serialize JSON output into Python objects; e.g. \texttt{f = r2.cmdj('pdfj @ entry0')} \\ \texttt{print f['name'], f['addr'], f['ops'][0]['opcode']}
+
+\subsubsection{r2pipe: connecting to other r2 instances}
+You can connect to any web-listening instance of r2 by passing \texttt{r2pipe.open} a
+string of the form \texttt{'http://}\textit{host}\texttt{:}\textit{port}\texttt{'}.
+By using this approach you get your own seek-cursor: your seek commands won't affect
+others.
+
+To open a background web-service in r2 use command \texttt{=h\&}. You may also want to 
+take a look at configuration variable \texttt{http.sandbox}.
 
 \subsection{Configuration}
 \begin{tabular}{@{}ll@{}}
