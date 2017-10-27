@@ -108,11 +108,12 @@ or piped to an external command with \texttt{|}\textit{progname} [\textit{args}]
 Examples: \texttt{afl > all\_functions} and \texttt{afl | wc -l}.
 
 External commands can be run with \texttt{!!}\textit{progname} [\textit{args}].
-Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
+% Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
 
+Moreover, backticks can be used to send the output of r2-commands as arguments; e.g.
+\texttt{!!echo `? 42`}.
 % External commands can also be run with \texttt{\#!pipe}, see below in \emph{Python scripting}.
-
-The output of external programs can be used as arguments for internal commands by using back-ticks to enclose the invocation of external commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
+Vice versa output of external programs can be used as arguments for internal commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
 
 Some common Unix-like commands are implemented as built-ins; e.g. \texttt{ls}, \texttt{cd}, \texttt{pwd}, \texttt{mkdir} and \texttt{rm}.
 
