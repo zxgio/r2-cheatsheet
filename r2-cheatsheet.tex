@@ -45,7 +45,7 @@
 \section{Starting Radare}
 The basic usage is \texttt{radare2} \textit{executable} (on some systems you can
 use \texttt{r2} instead of \texttt{radare2}); if you want to run radare2 without
-opening any file, you can use \texttt{--} instead of an executable name.
+opening any file, you can use \texttt{-{}-} instead of an executable name.
 
 Some command-line options are:
 
@@ -211,7 +211,7 @@ Also: \texttt{e??search} for options
 \texttt{s+} \textit{n} & seek \textit{n} bytes forward \\
 \texttt{s++} & seek block-size bytes forward \\
 \texttt{s-} \textit{n} & seek \textit{n} bytes backward \\
-\texttt{s--} & seek block-size bytes backward \\
+\texttt{s-{}-} & seek block-size bytes backward \\
 \texttt{s-} & undo seek \\
 \texttt{s+} & redo seek \\
 \texttt{s=} & list seek history \\
@@ -398,7 +398,7 @@ Note: in order to get your defined \textit{name}s appear in disassembly, you mus
 arguments, permissions, directories and overridden default file-descriptors.
 Usage:
 
-\texttt{rarun2} [\texttt{-t}$|$\textit{script-name}\texttt{.rr2}] [\textit{directives}] [\texttt{--}] [\textit{prog-name}] [\textit{args}]
+\texttt{rarun2} [\texttt{-t}$|$\textit{script-name}\texttt{.rr2}] [\textit{directives}] [\texttt{-{}-}] [\textit{prog-name}] [\textit{args}]
 
 \texttt{rarun2 -t} shows the terminal name, say $\alpha$, and wait for a connection from another process. For instance, from another terminal, you can execute \texttt{rarun2 stdio=$\alpha$ program=/bin/sh} (use \texttt{stdin}/\texttt{stdout} to redirect one stream only).
 
