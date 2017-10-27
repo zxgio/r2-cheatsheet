@@ -324,11 +324,11 @@ Also: \texttt{e??search} for options
 \texttt{tp} \textit{t-name} \texttt{=} \textit{addx} & cast data at \textit{addx} to type \textit{t-name}, \\ & and prints it \\
 \end{tabular}
 
-\section{Visual mode: \texttt{V}}
+\section{Visual mode: \texttt{V} (\texttt{q} exits)}
 % Command \texttt{V} enters \emph{visual mode}.
 
 \begin{tabular}{@{}ll@{}}
-\texttt{q} & exit visual-mode \\
+% \texttt{q} & exit visual-mode \\
 \texttt{c} & cursor-mode, \textit{tab} switches among stack/regs/disassembly \\
 & \texttt{+}/\texttt{-} increment/decrement current byte \\
 \texttt{:} & execute a normal-mode command; e.g. \texttt{:dm} \\
@@ -341,6 +341,7 @@ Also: \texttt{e??search} for options
 \texttt{X} & browse xrefs-from current function \\
 \texttt{\_} & browse flags \\
 \texttt{d} & define \texttt{f}unction, \texttt{e}nd-function, \texttt{r}ename, \ldots \\
+\texttt{di}$\{$\texttt{b}$|$\texttt{o}$|$\texttt{d}$|$\texttt{h}$|$\texttt{s}$\}$ & define immediate bin/oct/dec/hex or str \\
 \texttt{V} & enter block-graph viewer \\
 \texttt{A} & enter visual-assembler (preview must be confirmed)\\
 \texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
