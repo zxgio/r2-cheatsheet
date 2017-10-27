@@ -224,9 +224,10 @@ Also: \texttt{e??search} for options
 	the whole command must be quoted: \\ &
 \texttt{"wa} \textit{asm-instr$_1$}\texttt{;} \textit{asm-instr$_2$}\texttt{;} \ldots\texttt{"} \\
 \texttt{wao} \textit{\ldots} & replace current instruction; see \texttt{wao?} for details \\
-\texttt{w} \textit{str} & write string \textit{str} \\
-\texttt{wz} \textit{str} & write string \textit{str} and append byte \texttt{\textbackslash x00} \\
+\texttt{w}[\texttt{z}] \textit{str} & write string \textit{str} [and append byte \texttt{\textbackslash x00}] \\
 \texttt{wx} \textit{hex-pairs} & write hex-pairs \\
+\texttt{wc} & list pending changes (see variable \texttt{io.cache}) \\
+\texttt{wc*} & list pending changes in Radare commands \\
 \end{tabular}
 
 \section{Analysis (functions and syscalls): \texttt{a}}
@@ -234,8 +235,8 @@ Also: \texttt{e??search} for options
 \texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
 \texttt{afl}[\texttt{l}] & list functions [with details] \\
 \texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
-\texttt{afn} \textit{new-name} \textit{addx} & name function at address \textit{addx} \\
-\texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
+\texttt{afn} \textit{new-name} \textit{addx} & (re)name function at address \textit{addx} \\
+% \texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
 \texttt{asl} & list syscalls \\
 \texttt{asl} \textit{name} & display syscall-number for \textit{name} \\
 \texttt{asl} \textit{n} & display name of syscall number \textit{n} \\
@@ -256,8 +257,7 @@ Also: \texttt{e??search} for options
 \begin{tabular}{@{}ll@{}}
 \texttt{i} & show info of current file \\
 \texttt{ie} & entrypoint \\
-\texttt{iz} & strings in data sections \\
-\texttt{izz} & strings in the whole binary \\
+\texttt{iz}[\texttt{z}] & strings in data sections [whole binary] \\
 \texttt{il} & libraries \\
 \texttt{ii} & imports \\
 \texttt{iS} & sections \\
