@@ -177,6 +177,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
 \\
 \texttt{dbg.follow.child} & continue tracing the child process on fork \\
+\texttt{dbg.slow} & show stack and regs in visual mode, in a slow but \\ & verbose (e.g. telescoping) mode \\
 \\
 \texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
 \\
@@ -302,8 +303,7 @@ Also: \texttt{e??search} for options
 \texttt{db}[\texttt{-}]\ \textit{addx} & add [remove] breakpoint \\
 \texttt{doo \textit{args}} & (re)start debugging \\
 \texttt{ood} & synonym for \texttt{doo} \\
-\texttt{ds} & step into \\
-\texttt{dso} & step over \\
+\texttt{ds}[\texttt{o}] & step into [over]\\
 \texttt{dbt} & display backtrace \\
 \texttt{drx} & hardware breakpoints \\
 \texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
@@ -330,7 +330,7 @@ Also: \texttt{e??search} for options
 
 \begin{tabular}{@{}ll@{}}
 % \texttt{q} & exit visual-mode \\
-\texttt{c} & cursor-mode, \textit{tab} switches among stack/regs/disassembly \\
+\texttt{c} & cursor-mode, \textit{tab} switches among panels \\
 & \texttt{+}/\texttt{-} increment/decrement current byte \\
 \texttt{:} & execute a normal-mode command; e.g. \texttt{:dm} \\
 \texttt{p} and \texttt{P} & rotate forward/backward print modes \\
@@ -348,6 +348,7 @@ Also: \texttt{e??search} for options
 \texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
 \texttt{i} & enter insert mode \\
 \texttt{e} & configures internal variables \\
+\texttt{"} & toggle the column mode \\
 \end{tabular}
 \subsection{Seeking (in Visual Mode)}
 \begin{tabular}{@{}ll@{}}
