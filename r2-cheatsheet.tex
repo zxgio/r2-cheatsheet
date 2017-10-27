@@ -228,6 +228,7 @@ Also: \texttt{e??search} for options
 \texttt{wx} \textit{hex-pairs} & write hex-pairs \\
 \texttt{wc} & list pending changes (see variable \texttt{io.cache}) \\
 \texttt{wc*} & list pending changes in Radare commands \\
+\texttt{wtf} [\textit{file}] [\textit{size}] & write to file \\
 \end{tabular}
 
 \section{Analysis (functions and syscalls): \texttt{a}}
@@ -267,7 +268,7 @@ Also: \texttt{e??search} for options
 \section{Printing: \texttt{p}}
 \begin{tabular}{@{}ll@{}}
 \texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
-\texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print \textit{n} bytes (or block-size), as words, with \\ & references to flags and code (telescoping) at \\ & \textit{addx} (or current position)\\
+\texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print with references to flags/code (telescoping) \\
 \texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
 \texttt{pxh} \ldots & hexdump half-words (16 bits) \\
 \texttt{pxw} \ldots & hexdump words (32 bits) \\
