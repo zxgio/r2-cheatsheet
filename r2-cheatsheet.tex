@@ -271,9 +271,7 @@ Also: \texttt{e??search} for options
 \texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
 \texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print with references to flags/code (telescoping) \\
 \texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
-\texttt{pxh} \ldots & hexdump half-words (16 bits) \\
-\texttt{pxw} \ldots & hexdump words (32 bits) \\
-\texttt{pxq} \ldots & hexdump quad-words (64 bits) \\
+\texttt{px}$\{$\texttt{h}$|$\texttt{w}$|$\texttt{q}$\}$ \ldots & hexdump half-words (16 bits) / words (32 bits) / \\ & quad-words (64 bits) \\
 \texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
 \texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (in gdb see: \texttt{help x} \\ & from r2: \texttt{!!gdb -q -ex 'help x' -ex quit}) \\
 \texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
@@ -281,6 +279,7 @@ Also: \texttt{e??search} for options
 \texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
 \texttt{pdf} [\texttt{@} \textit{fn-name}] & disassemble function \textit{fn-name} \\
 \texttt{pc}[\texttt{p}] [\textit{n}] [\texttt{@} \textit{addx}] & dumps in C [Python] format \\
+\texttt{*} \textit{addx} [\texttt{=}\textit{value}] & shortcut for reading/writing at \textit{addx} \\
 \end{tabular}
 
 \section{Debugging: \texttt{d}}
