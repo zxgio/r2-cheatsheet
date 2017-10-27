@@ -326,7 +326,7 @@ Also: \texttt{e??search} for options
 \end{tabular}
 
 \section{Visual mode: \texttt{V}}
-Command \texttt{V} enters \emph{visual mode}.
+% Command \texttt{V} enters \emph{visual mode}.
 
 \begin{tabular}{@{}ll@{}}
 \texttt{q} & exit visual-mode \\
@@ -345,6 +345,7 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{V} & enter block-graph viewer \\
 \texttt{A} & enter visual-assembler (preview must be confirmed)\\
 \texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
+\texttt{i} & enter insert mode \\
 \end{tabular}
 \subsection{Seeking (in Visual Mode)}
 \begin{tabular}{@{}ll@{}}
@@ -357,8 +358,7 @@ Command \texttt{V} enters \emph{visual mode}.
 \textit{d} (a non-zero digit) & jump to the target marked \texttt{[}\textit{d}\texttt{]} \\
 \texttt{m}\textit{l} (a letter) & mark the spot with letter \textit{l} \\
 \texttt{'}\textit{l} & jump to mark \textit{l} \\
-\texttt{n} & jump to next function \\
-\texttt{N} & jump to previous function
+\texttt{n} / \texttt{N} & jump to next/previous function \\
 \end{tabular}
 \subsection{Debugging (in Visual Mode)}
 \begin{tabular}{@{}ll@{}}
