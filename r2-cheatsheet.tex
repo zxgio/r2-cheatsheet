@@ -57,8 +57,7 @@ Some command-line options are:
 \texttt{-A}	& analyze all referenced code (\texttt{aaa} command) \\
 \texttt{-R} \textit{profile}\texttt{.rr2} & specifies \texttt{rarun2} profile (same as \\ & \texttt{-e dbg.profile=}\textit{profile}\texttt{.rr2}) \\
 \texttt{-w}	& open file in write mode \\
-\texttt{-p} \textit{prj} & use project \textit{prj} \\
-\texttt{-p} & list projects \\
+\texttt{-p} [\textit{prj}] & list projects / use project \textit{prj} \\
 \texttt{-h} & show help message (\texttt{-hh} the verbose one)
 \end{tabular}
 
@@ -86,7 +85,7 @@ All commands that:
 \item accept an optional size (e.g. \texttt{pd}), use the current block size by default (see: \texttt{b})
 \item accept an optional address (e.g., \texttt{pdf}), use the current position by default (see: \texttt{s})
 \end{itemize}
-
+Commands can be chained by using \texttt{;} as separator; e.g. \texttt{s fun; pd 2}
 \subsection{Internal grep-like filtering}
 You can filter command output by appending \texttt{\textasciitilde{}}[\texttt{!}]\textit{str}, to display only rows [not] containing string \textit{str}; e.g. \texttt{pdf\textasciitilde{}rdx} and \texttt{pdf\textasciitilde{}!rdx}. You can further filter by appending
 
