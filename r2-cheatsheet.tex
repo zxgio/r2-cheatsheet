@@ -229,8 +229,7 @@ Also: \texttt{e??search} for options
 \section{Analysis (functions and syscalls): \texttt{a}}
 \begin{tabular}{@{}ll@{}}
 \texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
-\texttt{afl} & list functions \\
-\texttt{afll} & list functions with details \\
+\texttt{afl}[\texttt{l}] & list functions [with details] \\
 \texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
 \texttt{afn} \textit{new-name} \textit{addx} & name function at address \textit{addx} \\
 \texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
@@ -250,7 +249,7 @@ Also: \texttt{e??search} for options
 \texttt{agC} & full program callgraph \\
 \end{tabular}
 
-\section{Information: \texttt{i}}
+\section{Information: \texttt{i} (and \texttt{S})}
 \begin{tabular}{@{}ll@{}}
 \texttt{i} & show info of current file \\
 \texttt{ie} & entrypoint \\
@@ -259,13 +258,14 @@ Also: \texttt{e??search} for options
 \texttt{il} & libraries \\
 \texttt{ii} & imports \\
 \texttt{iS} & sections \\
+\texttt{S} & list segments (confusingly called sections?!?) \\
 \end{tabular}
 
 \section{Printing: \texttt{p}}
 \begin{tabular}{@{}ll@{}}
 \texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
 \texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print \textit{n} bytes (or block-size), as words, with \\ & references to flags and code (telescoping) at \\ & \textit{addx} (or current position)\\
-\texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump \\
+\texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
 \texttt{pxh} \ldots & hexdump half-words (16 bits) \\
 \texttt{pxw} \ldots & hexdump words (32 bits) \\
 \texttt{pxq} \ldots & hexdump quad-words (64 bits) \\
