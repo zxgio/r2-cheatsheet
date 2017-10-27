@@ -209,15 +209,13 @@ Also: \texttt{e??search} for options
 \begin{tabular}{@{}ll@{}}
 \texttt{s} & print current position/address \\
 \texttt{s} \textit{addx} & seek to \textit{addx} \\
-\texttt{s..} \textit{hex-v} & changes the least-significant part of current address to \textit{hex-v}\\
-\texttt{s+} \textit{n} & seek \textit{n} bytes forward \\
-\texttt{s++} & seek block-size bytes forward \\
-\texttt{s-} \textit{n} & seek \textit{n} bytes backward \\
-\texttt{s-{}-} & seek block-size bytes backward \\
+\texttt{s..} \textit{hex} & changes the least-significant part of current address to \textit{hex}\\
+\texttt{s+} \textit{n} and \texttt{s-} \textit{n} & seek \textit{n} bytes forward/backward \\
+\texttt{s++} and \texttt{s-{}-} & seek block-size bytes forward/backward \\
 \texttt{s-} & undo seek \\
 \texttt{s+} & redo seek \\
-\texttt{s=} & list seek history \\
-\texttt{s*} & list seek history as r2-commands \\
+% \texttt{s=} & list seek history \\
+% \texttt{s*} & list seek history as r2-commands \\
 \end{tabular}
 
 \section{Writing: \texttt{w}}
