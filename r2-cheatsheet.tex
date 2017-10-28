@@ -373,13 +373,19 @@ Also: \texttt{e??search} for options
 \end{tabular}
 
 \section{Flags (AKA ``bookmarks''): \texttt{f}}
-Note: in order to get your defined \textit{name}s appear in disassembly, you must include a prefix (\texttt{fun}, \texttt{sub}, \texttt{obj}, \ldots); e.g.  \texttt{f obj.foo @ 0x1234}
 \begin{tabular}{@{}ll@{}}
+\texttt{fs [\textit{name}]} & display flagspaces [select/create fs \textit{name}] \\
+\texttt{fs+} \textit{name} & push previous flagspace and set \textit{name} \\
+\texttt{fs-} &           pop to the previous flagspace \\
+\texttt{f} & list flags \\
 \texttt{f} \textit{name} \texttt{@} \textit{addx} & \emph{or}\\
 \texttt{f} \textit{name} \texttt{=} \textit{addx} & associate name \textit{name} to address \textit{addx} \\
 \texttt{f- @} \textit{addx} & remove the association at address \textit{addx} \\
 \texttt{f-} \textit{name} & remove the association with name \textit{name} \\
-\end{tabular}
+\end{tabular} \\
+Note: to get your \textit{name}s appear in disassembly, you must include a prefix (\texttt{fun}, \texttt{sub}, \texttt{obj}, \ldots)
+% ; e.g. \texttt{f obj.foo @ 0x1234}
+or define your own flagspace.
 
 \section{Comments: \texttt{C}}
 \begin{tabular}{@{}ll@{}}
