@@ -44,7 +44,7 @@
 
 \section{Starting Radare}
 The basic usage is \texttt{radare2} \textit{exe} (on some systems you can
-use simply \texttt{r2}) % instead of \texttt{radare2}).
+use simply \texttt{r2} instead of \texttt{radare2}).
 If there exists a script named \textit{exe}\texttt{.r2},
 then it gets executed after the others rc-files.
 If you want to run radare2 without opening any file, you can use \texttt{-{}-} instead of an executable name.
@@ -62,6 +62,17 @@ Some command-line options are:
 \end{tabular}
 
 Example: \texttt{r2 -dA /bin/ls}
+
+\subsection{Running in different environments: rarun2}
+\texttt{rarun2} runs programs with different environments,
+arguments, permissions, directories and overridden default file-descriptors.
+Usage:
+
+\texttt{rarun2} [\texttt{-t}$|$\textit{script-name}\texttt{.rr2}] [\textit{directives}] [\texttt{-{}-}] [\textit{prog-name}] [\textit{args}]
+
+\texttt{rarun2 -t} shows the terminal name, say $\alpha$, and wait for a connection from another process. For instance, from another terminal, you can execute \texttt{rarun2 stdio=$\alpha$ program=/bin/sh} (use \texttt{stdin}/\texttt{stdout} to redirect one stream only). Run \texttt{rarun2 -h} to get a sample \texttt{.rr2} file.
+
+rarun2 supports \emph{a lot} of directives, see the man page for details.
 
 \section{General information}
 The command \texttt{?} prints the help. Command names are hierarchically defined; for instance, all \textbf{p}rinting commands start with \texttt{p}. So, to understand what a command does, you can append \texttt{?} to a \emph{prefix} of such a command; e.g., to learn what \texttt{pdf} does, you can first try \texttt{pd?}, then the more general \texttt{p?}.
@@ -107,11 +118,10 @@ or piped to an external command with \texttt{|}\textit{progname} [\textit{args}]
 Examples: \texttt{afl > all\_functions} and \texttt{afl | wc -l}.
 
 External commands can be run with \texttt{!!}\textit{progname} [\textit{args}].
-% Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
+Note: if a command starts with a single \texttt{!}, the rest of the string is passed to currently loaded IO plugin (only if no plugin can handle the command, it is passed to the shell).
 
 Moreover, backticks can be used to send the output of r2-commands as arguments; e.g.
 \texttt{!!echo `? 42`}.
-% External commands can also be run with \texttt{\#!pipe}, see below in \emph{Python scripting}.
 Vice versa output of external programs can be used as arguments for internal commands; e.g. \texttt{pdf `echo 3` @ `echo entry0`}.
 
 Some common Unix-like commands are implemented as built-ins; e.g. \texttt{ls}, \texttt{cd}, \texttt{pwd}, \texttt{mkdir} and \texttt{rm}.
@@ -171,31 +181,31 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{asm.cmtright} & comments at right of disassembly if they fit \\
 \texttt{asm.emu} & run ESIL emulation analysis on disasm \\
 \texttt{asm.demangle} & Show demangled symbols in disasm \\
-\\
+% \\
 \texttt{bin.demangle} & Import demangled symbols from RBin \\
-\\
+% \\
 \texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
-\\
+% \\
 \texttt{dbg.follow.child} & continue tracing the child process on fork \\
 \texttt{dbg.slow} & show stack and regs in visual mode, in a slow but \\ & verbose (e.g. telescoping) mode \\
-\\
+% \\
 \texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
-\\
+% \\
 \texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
 \texttt{scr.nkey} & select seek mode (fun, hit, flag); affects commands \\ & \texttt{n} and \texttt{N} during visual mode \\
 \texttt{scr.wheel} & enables mouse-wheel in visual mode \\
 \texttt{scr.breaklines} & break lines in Visual instead of truncating them \\
 \end{tabular}
-\subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
-\begin{verbatim}
-e asm.bytes=0
-e asm.cmtright=true
-e cmd.stack=px 32
-e dbg.slow=true
-e scr.utf8=true
-e scr.wheel=false
-eco solarized
-\end{verbatim}
+% \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
+% \begin{verbatim}
+% e asm.bytes=0
+% e asm.cmtright=true
+% e cmd.stack=px 32
+% e dbg.slow=true
+% e scr.utf8=true
+% e scr.wheel=false
+% eco solarized
+% \end{verbatim}
 
 \section{Searching: \texttt{/}}
 \begin{tabular}{@{}ll@{}}
@@ -217,8 +227,8 @@ Also: \texttt{e??search} for options
 \texttt{s++} and \texttt{s-{}-} & seek block-size bytes forward/backward \\
 \texttt{s-} & undo seek \\
 \texttt{s+} & redo seek \\
-% \texttt{s=} & list seek history \\
-% \texttt{s*} & list seek history as r2-commands \\
+\texttt{s=} & list seek history \\
+\texttt{s*} & list seek history as r2-commands \\
 \end{tabular}
 
 \section{Writing: \texttt{w}}
@@ -240,7 +250,6 @@ Also: \texttt{e??search} for options
 \texttt{afl}[\texttt{l}] & list functions [with details] \\
 \texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
 \texttt{afn} \textit{new-name} \textit{addx} & (re)name function at address \textit{addx} \\
-% \texttt{afn} \textit{new-name} \textit{old-name} & rename function \\
 \texttt{asl} & list syscalls \\
 \texttt{asl} \textit{name} & display syscall-number for \textit{name} \\
 \texttt{asl} \textit{n} & display name of syscall number \textit{n} \\
@@ -252,124 +261,19 @@ Also: \texttt{e??search} for options
 \texttt{axt} \textit{addx} & find data/code references to \textit{addx} \\
 \texttt{ahi} $\{$\texttt{b}$|$\texttt{d}$|$\texttt{h}$|$\texttt{o}$|$\texttt{r}$|$\texttt{S}$|$\texttt{s}$\}$ \texttt{@} \textit{addx} & define binary/decimal/hex/octal/IP/ \\ & syscall/string base for immediate \\
 \end{tabular}
+\subsection{ESIL: \texttt{ae}}
+\begin{tabular}{@{}ll@{}}
+\texttt{aeim} & initialize ESIL VM stack \\
+\texttt{aepc} \textit{addr} & change ESIL PC to \textit{addx} (\texttt{aeip} sets PC to curseek)\\
+\texttt{aer} \dots & handle ESIL registers like \texttt{dr} does \\
+\texttt{aes}[\texttt{b}|\texttt{o}] & perform emulated debugger step [back|over] \\
+\texttt{aesu} \textit{addr} & step until given address \\
+\end{tabular}
 \subsection{Graphviz/graph code: \texttt{ag}}
 \begin{tabular}{@{}ll@{}}
 \texttt{ag} \textit{addr} & output graphviz code (BB at \textit{addr} and children) \\ &  E.g. view the function graph with: \texttt{ag \$\$ | xdot -} \\
 \texttt{agc} \textit{addr} & callgraph of function at \textit{addx} \\
 \texttt{agC} & full program callgraph \\
-\end{tabular}
-
-\section{Information: \texttt{i} (and \texttt{S})}
-\begin{tabular}{@{}ll@{}}
-\texttt{i} & show info of current file \\
-\texttt{iz}[\texttt{z}] & strings in data sections [whole binary] \\
-\texttt{i}$\{$\texttt{e}$|$\texttt{i}$|$\texttt{l}$|$\texttt{S}$\}$ & entrypoint/imports/libraries/sections \\
-\texttt{S} & list segments (confusingly called sections?!?) \\
-\end{tabular}
-
-\section{Printing: \texttt{p}}
-\begin{tabular}{@{}ll@{}}
-\texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
-\texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print with references to flags/code (telescoping) \\
-\texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
-\texttt{px}$\{$\texttt{h}$|$\texttt{w}$|$\texttt{q}$\}$ \ldots & hexdump in 16/32/64 bit words \\
-\texttt{px}$\{$\texttt{H}$|$\texttt{W}$|$\texttt{Q}$\}$ \ldots & as the previous one, but one per line \\
-\texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
-\texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (in gdb see: \texttt{help x} \\ & from r2: \texttt{!!gdb -q -ex 'help x' -ex quit}) \\
-\texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
-\texttt{p8} [\textit{n}] [\texttt{@} \textit{addx}] & print bytes \\
-\texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
-\texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
-\texttt{pdf} [\texttt{@} \textit{fn-name}] & disassemble function \textit{fn-name} \\
-\texttt{pc}[\texttt{p}] [\textit{n}] [\texttt{@} \textit{addx}] & dumps in C [Python] format \\
-\texttt{*} \textit{addx} [\texttt{=}\textit{value}] & shortcut for reading/writing at \textit{addx} \\
-\end{tabular}
-
-\section{Debugging: \texttt{d}}
-\begin{tabular}{@{}ll@{}}
-\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\
-% & BUG (?): this doesn't work on Windows \\
-\texttt{dc} & continue (or start) execution \\
-\texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
-\texttt{dcs} [\textit{name}] & continue until the next syscall (named \textit{name}, \\ & if specified) \\
-\texttt{dcr} & continue until ret (uses step over) \\
-\texttt{dr=} & show general-purpose regs and their values \\
-\texttt{dro} & show previous (old) values of registers \\
-\texttt{drr} & show register references (telescoping) \\
-\texttt{dr} \textit{reg-name} \texttt{=} \textit{value} & set register value \\
-\texttt{drt} & list register types \\
-\texttt{drt} \textit{type} & list registers of type \textit{type} and their values \\
-\texttt{db} & list breakpoints \\
-\texttt{db}[\texttt{-}]\ \textit{addx} & add [remove] breakpoint \\
-\texttt{doo \textit{args}} & (re)start debugging \\
-\texttt{ood} & synonym for \texttt{doo} \\
-\texttt{ds}[\texttt{o}] & step into [over]\\
-\texttt{dbt} & display backtrace \\
-\texttt{drx} & hardware breakpoints \\
-\texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
-%\texttt{dmi} & list library symbols \\
-\texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
-\end{tabular}
-
-\section{Types: \texttt{t}}
-\begin{tabular}{@{}ll@{}}
-\texttt{"td\ }\textit{C-type-def}\texttt{"} & define a new type \\
-\texttt{t} \textit{t-name} & show type \textit{t-name} in \texttt{pf} syntax \\
-\texttt{.t }\textit{t-name} \texttt{@} \textit{addx} & display the value (of type \textit{t-name}) at \textit{addx} \\
-\texttt{t} & list (base?) types \\
-\texttt{te} / \texttt{ts} / \texttt{tu} & list enums/structs/unions \\
-\texttt{to} \textit{file} & parse type information from C header file \\
-\texttt{tl} \textit{t-name} & link \textit{t-name} to current address \\
-\texttt{tl} \textit{t-name} \texttt{=} \textit{addx} & link \textit{t-name} to address \textit{addx} \\
-\texttt{tl} & list all links in readable format \\
-\texttt{tp} \textit{t-name} \texttt{=} \textit{addx} & cast data at \textit{addx} to type \textit{t-name}, \\ & and prints it \\
-\end{tabular}
-
-\section{Visual mode: \texttt{V} (\texttt{q} exits)}
-% Command \texttt{V} enters \emph{visual mode}.
-
-\begin{tabular}{@{}ll@{}}
-% \texttt{q} & exit visual-mode \\
-\texttt{c} & cursor-mode, \textit{tab} switches among panels \\
-& \texttt{+}/\texttt{-} increment/decrement current byte \\
-\texttt{:} & execute a normal-mode command; e.g. \texttt{:dm} \\
-\texttt{p} and \texttt{P} & rotate forward/backward print modes \\
-\texttt{/}\textit{str} & highlight occurrences of string \textit{str} \\
-\texttt{\$} & toggle pseudo-syntax \\
-\texttt{O} & toggle ESIL-asm \\
-\texttt{;} & add/remove comments (to current offset) \\
-\texttt{x} & browse xrefs-to current offset \\
-\texttt{X} & browse xrefs-from current function \\
-\texttt{\_} & browse flags \\
-\texttt{d} & define \texttt{f}unction, \texttt{e}nd-function, \texttt{r}ename, \ldots \\
-\texttt{di}$\{$\texttt{b}$|$\texttt{o}$|$\texttt{d}$|$\texttt{h}$|$\texttt{s}$\}$ & define immediate bin/oct/dec/hex or str \\
-\texttt{V} & enter block-graph viewer (\emph{space} toggles visual/graph)\\
-\texttt{A} & enter visual-assembler (preview must be confirmed)\\
-\texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
-\texttt{i} & enter insert mode \\
-\texttt{e} & configures internal variables \\
-\texttt{"} & toggle the column mode \\
-\end{tabular}
-\subsection{Seeking (in Visual Mode)}
-\begin{tabular}{@{}ll@{}}
-\texttt{.} & seeks to program counter \\
-\textit{Enter} & on jump/call instructions, follow target address \\
-\texttt{u} & undo \\
-\texttt{U} & redo \\
-\texttt{o} & go/seek to given offset \\
-\texttt{0} & seek to beginning of current function \\
-\textit{d} (a non-zero digit) & jump to the target marked \texttt{[}\textit{d}\texttt{]} \\
-\texttt{m}\textit{l} (a letter) & mark the spot with letter \textit{l} \\
-\texttt{'}\textit{l} & jump to mark \textit{l} \\
-\texttt{n} / \texttt{N} & jump to next/previous function \\
-\end{tabular}
-\subsection{Debugging (in Visual Mode)}
-\begin{tabular}{@{}ll@{}}
-\texttt{b} or \texttt{F2} & toggle breakpoint \\
-\texttt{F4} & run to cursor \\
-\texttt{s} or \texttt{F7} & step-into \\
-\texttt{S} or \texttt{F8} & step-over \\
-\texttt{F9} & continue \\
 \end{tabular}
 
 \section{Flags (AKA ``bookmarks''): \texttt{f}}
@@ -394,25 +298,125 @@ Also: \texttt{e??search} for options
 \texttt{CC!} [\texttt{@} \textit{addx}] & edit comment using \texttt{cfg.editor} (vim, \ldots) \\
 \end{tabular}
 
+\section{Debugging: \texttt{d}}
+\begin{tabular}{@{}ll@{}}
+\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\
+% & BUG (?): this doesn't work on Windows \\
+\texttt{dc} & continue (or start) execution \\
+\texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
+\texttt{dcs} [\textit{name}] & continue until the next syscall (named \textit{name}, \\ & if specified) \\
+\texttt{dcr} & continue until ret (uses step over) \\
+\texttt{dr=} & show general-purpose regs and their values \\
+\texttt{dro} & show previous (old) values of registers \\
+\texttt{drr} & show register references (telescoping) \\
+\texttt{dr} \textit{reg-name} \texttt{=} \textit{value} & set register value \\
+\texttt{drt} & list register types \\
+\texttt{drt} \textit{type} & list registers of type \textit{type} and their values \\
+\texttt{db} & list breakpoints \\
+\texttt{db}[\texttt{-}]\ \textit{addx} & add [remove] breakpoint \\
+\texttt{doo \textit{args}} & (re)start debugging \\
+\texttt{ood} & synonym for \texttt{doo} \\
+\texttt{ds}[\texttt{o}] & step into [over]\\
+\texttt{dbt} & display backtrace \\
+\texttt{drx} & hardware breakpoints \\
+\texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
+\texttt{dmi} & list library symbols \\
+\texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
+\end{tabular}
+
+\section{Types: \texttt{t}}
+\begin{tabular}{@{}ll@{}}
+\texttt{"td\ }\textit{C-type-def}\texttt{"} & define a new type \\
+\texttt{t} \textit{t-name} & show type \textit{t-name} in \texttt{pf} syntax \\
+\texttt{.t }\textit{t-name} \texttt{@} \textit{addx} & display the value (of type \textit{t-name}) at \textit{addx} \\
+\texttt{t} & list (base?) types \\
+\texttt{te} / \texttt{ts} / \texttt{tu} & list enums/structs/unions \\
+\texttt{to} \textit{file} & parse type information from C header file \\
+\texttt{tl} \textit{t-name} & link \textit{t-name} to current address \\
+\texttt{tl} \textit{t-name} \texttt{=} \textit{addx} & link \textit{t-name} to address \textit{addx} \\
+\texttt{tl} & list all links in readable format \\
+\texttt{tp} \textit{t-name} \texttt{=} \textit{addx} & cast data at \textit{addx} to type \textit{t-name}, \\ & and prints it \\
+\end{tabular}
+
+\section{Printing: \texttt{p}}
+\begin{tabular}{@{}ll@{}}
+\texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
+\texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print with references to flags/code (telescoping) \\
+\texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
+\texttt{px}$\{$\texttt{h}$|$\texttt{w}$|$\texttt{q}$\}$ \ldots & hexdump in 16/32/64 bit words \\
+\texttt{px}$\{$\texttt{H}$|$\texttt{W}$|$\texttt{Q}$\}$ \ldots & as the previous one, but one per line \\
+\texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
+\texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (in gdb see: \texttt{help x} \\ & from r2: \texttt{!!gdb -q -ex 'help x' -ex quit}) \\
+\texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
+\texttt{p8} [\textit{n}] [\texttt{@} \textit{addx}] & print bytes \\
+\texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
+\texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
+\texttt{pdf} [\texttt{@} \textit{fn-name}] & disassemble function \textit{fn-name} \\
+\texttt{pc}[\texttt{p}] [\textit{n}] [\texttt{@} \textit{addx}] & dumps in C [Python] format \\
+\texttt{*} \textit{addx} [\texttt{=}\textit{value}] & shortcut for reading/writing at \textit{addx} \\
+\texttt{pf} \textit{fmt} $a_1 [,a_2,\dots]$ & formatted print, see \texttt{pf??} and \texttt{pf???} \\
+\end{tabular}
+
+\section{Information: \texttt{i} (and \texttt{S})}
+\begin{tabular}{@{}ll@{}}
+\texttt{i} & show info of current file \\
+\texttt{iz}[\texttt{z}] & strings in data sections [whole binary] \\
+\texttt{i}$\{$\texttt{e}$|$\texttt{i}$|$\texttt{l}$|$\texttt{S}$\}$ & entrypoint/imports/libraries/sections \\
+\texttt{S} & list segments (confusingly called sections?!?) \\
+\end{tabular}
+
+\section{Visual mode: \texttt{V} (\texttt{q} exits)}
+Command \texttt{V} enters \emph{visual mode}.
+
+\begin{tabular}{@{}ll@{}}
+\texttt{q} & exit visual-mode \\
+\texttt{c} & cursor-mode, \textit{tab} switches among panels \\
+& \texttt{+}/\texttt{-} increment/decrement current byte \\
+\texttt{:} & execute a normal-mode command; e.g. \texttt{:dm} \\
+\texttt{p} and \texttt{P} & rotate forward/backward print modes \\
+\texttt{/}\textit{str} & highlight occurrences of string \textit{str} \\
+\texttt{\$} & toggle pseudo-syntax \\
+\texttt{O} & toggle ESIL-asm \\
+\texttt{;} & add/remove comments (to current offset) \\
+\texttt{x} & browse xrefs-to current offset \\
+\texttt{X} & browse xrefs-from current function \\
+\texttt{\_} & browse flags \\
+\texttt{d} & define \texttt{f}unction, \texttt{e}nd-function, \texttt{r}ename, \ldots \\
+\texttt{di}$\{$\texttt{b}$|$\texttt{o}$|$\texttt{d}$|$\texttt{h}$|$\texttt{s}$\}$ & define immediate bin/oct/dec/hex or str \\
+\texttt{V} & enter block-graph viewer (\emph{space} toggles visual/graph)\\
+\texttt{A} & enter visual-assembler (preview must be confirmed)\\
+\texttt{n} / \texttt{N} & seek next/previous function/flag/hit (see \texttt{scr.nkey}) \\
+\texttt{i} & enter insert mode \\
+\texttt{e} & configures internal variables \\
+\texttt{"} & toggle the column mode \\
+\end{tabular}
+\subsection{Seeking (in Visual Mode)}
+\begin{tabular}{@{}ll@{}}
+\texttt{.} & seeks to program counter \\
+\textit{Enter} & on jump/call instructions, follow target address \\
+\texttt{u} / \texttt{U} & undo / redo \\
+\texttt{o} & go/seek to given offset \\
+\texttt{0} (\emph{zero})& seek to beginning of current function \\
+\textit{d} (a non-zero digit) & jump to the target marked \texttt{[}\textit{d}\texttt{]} \\
+\texttt{m}\textit{l} (a letter) & mark the spot with letter \textit{l} \\
+\texttt{'}\textit{l} & jump to mark \textit{l} \\
+\texttt{n} / \texttt{N} & jump to next/previous function \\
+\end{tabular}
+\subsection{Debugging (in Visual Mode)}
+\begin{tabular}{@{}ll@{}}
+\texttt{b} or \texttt{F2} & toggle breakpoint \\
+\texttt{F4} & run to cursor \\
+\texttt{s} or \texttt{F7} & step-into \\
+\texttt{S} or \texttt{F8} & step-over \\
+\texttt{F9} & continue \\
+\end{tabular}
+
 \section{Projects: \texttt{P} [unstable feature]}
 \begin{tabular}{@{}ll@{}}
 \texttt{Pl} & list all projects \\
 \texttt{P}$\{$\texttt{o}$|$\texttt{s}$|$\texttt{d}$\}$ [\textit{prj-name}] & open/save/delete project \textit{prj-name} \\
 \texttt{Pc} \textit{prj-name} & show project script to console \\
 \end{tabular}
-
-\section{Running in different environments: rarun2}
-\texttt{rarun2} is used as a launcher for running programs with different environment,
-arguments, permissions, directories and overridden default file-descriptors.
-Usage:
-
-\texttt{rarun2} [\texttt{-t}$|$\textit{script-name}\texttt{.rr2}] [\textit{directives}] [\texttt{-{}-}] [\textit{prog-name}] [\textit{args}]
-
-\texttt{rarun2 -t} shows the terminal name, say $\alpha$, and wait for a connection from another process. For instance, from another terminal, you can execute \texttt{rarun2 stdio=$\alpha$ program=/bin/sh} (use \texttt{stdin}/\texttt{stdout} to redirect one stream only). Run \texttt{rarun2 -h} to get a sample \texttt{.rr2} file.
-
-rarun2 supports \emph{a lot} of directives, see the man page for details.
-
-
 
 \rule{1.0\linewidth}{0.25pt}
 \scriptsize
