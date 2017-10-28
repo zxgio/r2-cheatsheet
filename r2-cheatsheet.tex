@@ -43,16 +43,16 @@
 \end{center}
 
 \section{Starting Radare}
-The basic usage is \texttt{radare2} \textit{executable} (on some systems you can
-use \texttt{r2} instead of \texttt{radare2}); if you want to run radare2 without
-opening any file, you can use \texttt{-{}-} instead of an executable name.
+The basic usage is \texttt{radare2} \textit{exe} (on some systems you can
+use simply \texttt{r2}) % instead of \texttt{radare2}).
+If there exists a script named \textit{exe}\texttt{.r2},
+then it gets executed after the others rc-files.
+If you want to run radare2 without opening any file, you can use \texttt{-{}-} instead of an executable name.
 
 Some command-line options are:
 
 \begin{tabular}{@{}ll@{}}
 \texttt{-d} \textit{file} & debug executable \textit{file} \\
-	& \emph{Warning:} if there exists a script named \textit{file}\texttt{.r2}, \\
-	& then it gets executed after the others rc-files \\
 \texttt{-d} \textit{pid} & debug process \textit{pid} \\
 \texttt{-A}	& analyze all referenced code (\texttt{aaa} command) \\
 \texttt{-r} \textit{profile}\texttt{.rr2} & specifies \texttt{rarun2} profile (same as \\ & \texttt{-e dbg.profile=}\textit{profile}\texttt{.rr2}) \\
@@ -146,7 +146,7 @@ string of the form \texttt{'http://}\textit{host}\texttt{:}\textit{port}\texttt{
 By using this approach you get your own seek-cursor: your seek commands won't affect
 others.
 
-To open a background web-service in r2 use command \texttt{=h\&}. You may also want to 
+To open a background web-service in r2 use command \texttt{=h\&}. You may also want to
 take a look at configuration variable \texttt{http.sandbox}.
 
 \subsection{Configuration}
@@ -189,9 +189,10 @@ take a look at configuration variable \texttt{http.sandbox}.
 \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
 \begin{verbatim}
 e asm.bytes=0
-e scr.utf8=true
 e asm.cmtright=true
 e cmd.stack=px 32
+e dbg.slow=true
+e scr.utf8=true
 e scr.wheel=false
 eco solarized
 \end{verbatim}
@@ -201,7 +202,7 @@ eco solarized
 \texttt{/ \textit{str}} & search for string \textit{str} \\
 \texttt{/x \textit{hstr}} & search for hex-string \textit{hstr} \\
 \texttt{/a \textit{asm-instr}} & assemble instruction and search for its bytes \\
-\texttt{/R }\textit{opcode} & find ROP gadgets containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\ & It seems you need to be in \emph{debug} mode to use this (?!?)\\
+\texttt{/R }\textit{opcode} & find ROP gadgets containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
 \texttt{/A }\textit{type} & find instructions of type \textit{type} (\texttt{/A?} for the listof types) \\
 \end{tabular}
 
@@ -389,7 +390,7 @@ or define your own flagspace.
 
 \section{Comments: \texttt{C}}
 \begin{tabular}{@{}ll@{}}
-\texttt{CC} & list all comments in human friendly form \\
+% \texttt{CC} & list all comments in human friendly form \\
 \texttt{CCu} \textit{text} [\texttt{@} \textit{addx}] & set (update?) comment \textit{text} at \textit{addx} \\
 \texttt{CC} \textit{text} [\texttt{@} \textit{addx}] & append comment \textit{text} at \textit{addx} \\
 \texttt{CC-} [\texttt{@} \textit{addx}] & remove comment at \textit{addx} \\
@@ -400,9 +401,7 @@ or define your own flagspace.
 \section{Projects: \texttt{P} [unstable feature]}
 \begin{tabular}{@{}ll@{}}
 \texttt{Pl} & list all projects \\
-\texttt{Ps} [\textit{prj-name}] & save project \textit{prj-name} \\
-\texttt{Po} \textit{prj-name} & open project \textit{prj-name} \\
-\texttt{Pd} \textit{prj-name} & delete project \textit{prj-name} \\
+\texttt{P}$\{$\texttt{o}$|$\texttt{s}$|$\texttt{d}$\}$ [\textit{prj-name}] & open/save/delete project \textit{prj-name} \\
 \texttt{Pc} \textit{prj-name} & show project script to console \\
 \end{tabular}
 
@@ -416,6 +415,7 @@ Usage:
 \texttt{rarun2 -t} shows the terminal name, say $\alpha$, and wait for a connection from another process. For instance, from another terminal, you can execute \texttt{rarun2 stdio=$\alpha$ program=/bin/sh} (use \texttt{stdin}/\texttt{stdout} to redirect one stream only). Run \texttt{rarun2 -h} to get a sample \texttt{.rr2} file.
 
 rarun2 supports \emph{a lot} of directives, see the man page for details.
+
 
 
 \rule{1.0\linewidth}{0.25pt}
