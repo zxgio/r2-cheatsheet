@@ -236,7 +236,7 @@ Also: \texttt{e??search} for options
 
 \section{Analysis (functions and syscalls): \texttt{a}}
 \begin{tabular}{@{}ll@{}}
-\texttt{aaa} & analyze (\texttt{aa}) and auto-name all functions \\
+\texttt{aaa} & analyze (\texttt{aa}) and auto-name functions \\
 \texttt{afl}[\texttt{l}] & list functions [with details] \\
 \texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
 \texttt{afn} \textit{new-name} \textit{addx} & (re)name function at address \textit{addx} \\
@@ -248,7 +248,9 @@ Also: \texttt{e??search} for options
 \texttt{.afvd} \textit{var-name} & display address and value of \textit{var-name} \\
 \texttt{afvn} \textit{name} \textit{new-name} & rename argument/local variable \\
 \texttt{afvt} \textit{name} \textit{type} & change type for given argument/local \\
+\texttt{afv-} \textit{name} & removes variable \textit{name} \\
 \texttt{axt} \textit{addx} & find data/code references to \textit{addx} \\
+\texttt{ahi} $\{$\texttt{b}$|$\texttt{d}$|$\texttt{h}$|$\texttt{o}$|$\texttt{r}$|$\texttt{S}$|$\texttt{s}$\}$ \texttt{@} \textit{addx} & define binary/decimal/hex/octal/IP/ \\ & syscall/string base for immediate \\
 \end{tabular}
 \subsection{Graphviz/graph code: \texttt{ag}}
 \begin{tabular}{@{}ll@{}}
@@ -260,11 +262,8 @@ Also: \texttt{e??search} for options
 \section{Information: \texttt{i} (and \texttt{S})}
 \begin{tabular}{@{}ll@{}}
 \texttt{i} & show info of current file \\
-\texttt{ie} & entrypoint \\
 \texttt{iz}[\texttt{z}] & strings in data sections [whole binary] \\
-\texttt{il} & libraries \\
-\texttt{ii} & imports \\
-\texttt{iS} & sections \\
+\texttt{i}$\{$\texttt{e}$|$\texttt{i}$|$\texttt{l}$|$\texttt{S}$\}$ & entrypoint/imports/libraries/sections \\
 \texttt{S} & list segments (confusingly called sections?!?) \\
 \end{tabular}
 
