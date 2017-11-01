@@ -244,8 +244,10 @@ Also: \texttt{e??search} for options
 \texttt{w}[\texttt{z}] \textit{str} & write string \textit{str} [and append byte \texttt{\textbackslash x00}] \\
 \texttt{wx} \textit{hex-pairs} & write hex-pairs \\
 \texttt{wc} & list pending changes (see variable \texttt{io.cache}) \\
-\texttt{wc*} & list pending changes in Radare commands \\
+% \texttt{wc*} & list pending changes in Radare commands \\
 \texttt{wtf} [\textit{file}] [\textit{size}] & write to file \\
+\texttt{wopO} \textit{value} & find the offset of \textit{value} inside a De Bruijn pattern; \\
+	& to produce a pattern: \texttt{ragg2 -r -P} \textit{size} \\
 \end{tabular}
 
 \section{Analysis (functions and syscalls): \texttt{a}}
