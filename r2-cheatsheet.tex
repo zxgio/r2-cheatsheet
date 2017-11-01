@@ -96,7 +96,10 @@ All commands that:
 \item accept an optional size (e.g. \texttt{pd}), use the current block size by default (see: \texttt{b})
 \item accept an optional address (e.g., \texttt{pdf}), use the current position by default (see: \texttt{s})
 \end{itemize}
-Commands can be chained by using \texttt{;} as separator; e.g. \texttt{s fun; pd 2}
+Commands can be chained by using \texttt{;}; e.g. \texttt{s fun; pd 2}.
+
+A single command can be applied to each element of a sequence by using \texttt{@@}; e.g. \texttt{axt @@ str.*}, see \texttt{@@?}.
+
 \subsection{Internal grep-like filtering}
 You can filter command output by appending \texttt{\textasciitilde{}}[\texttt{!}]\textit{str}, to display only rows [not] containing string \textit{str}; e.g. \texttt{pdf\textasciitilde{}rdx} and \texttt{pdf\textasciitilde{}!rdx}. You can further filter by appending
 
