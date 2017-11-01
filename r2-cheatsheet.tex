@@ -216,7 +216,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{/ \textit{str}} & search for string \textit{str} \\
 \texttt{/x \textit{hstr}} & search for hex-string \textit{hstr} \\
 \texttt{/a \textit{asm-instr}} & assemble instruction and search for its bytes \\
-\texttt{/R }\textit{opcode} & find ROP gadgets containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
+\texttt{/R}[\texttt{/}]\ \textit{opcode} & find ROP gadgets [with r.e.] containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
 \texttt{/A }\textit{type} & find instructions of type \textit{type} (\texttt{/A?} for the listof types) \\
 \end{tabular}
 
@@ -310,7 +310,7 @@ Also: \texttt{e??search} for options
 % & BUG (?): this doesn't work on Windows \\
 \texttt{dc} & continue (or start) execution \\
 \texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
-\texttt{dcs} [\textit{name}] & continue until the next syscall (named \textit{name}, \\ & if specified) \\
+\texttt{dcs} [\textit{name}] & continue until the next syscall [\textit{name}] \\
 \texttt{dcr} & continue until ret (uses step over) \\
 \texttt{dr=} & show general-purpose regs and their values \\
 \texttt{dro} & show previous (old) values of registers \\
@@ -323,10 +323,11 @@ Also: \texttt{e??search} for options
 \texttt{doo \textit{args}} & (re)start debugging \\
 \texttt{ood} & synonym for \texttt{doo} \\
 \texttt{ds}[\texttt{o}] & step into [over]\\
-\texttt{dbt} & display backtrace \\
+\texttt{dbt} & display backtrace (check \texttt{dbg.btdepth}/\texttt{btalgo}) \\
 \texttt{drx} & hardware breakpoints \\
 \texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
-\texttt{dmi} & list library symbols \\
+\texttt{dmm} & list modules (libraries, loaded binaries) \\
+\texttt{dmi} [\textit{addr}|\textit{lib}] [\textit{sym}] & list symbols of target lib \\
 \texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
 \end{tabular}
 
