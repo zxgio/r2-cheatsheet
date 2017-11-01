@@ -169,8 +169,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{e} & show the value of all variables \\
 \texttt{eco} \textit{theme-name} & select theme; eg. \texttt{eco solarized} \\
 \texttt{eco} & list available themes \\
-\texttt{b} & display current block size \\
-\texttt{b} \textit{size} & set block size \\
+\texttt{b} [\textit{size}]& display [set] current block size \\
 \texttt{env} [\textit{name} [\texttt{=}\textit{value}]] & get/set environment variables \\
 \end{tabular}
 \subsubsection{Some variables}
@@ -184,12 +183,13 @@ take a look at configuration variable \texttt{http.sandbox}.
 % \\
 \texttt{bin.demangle} & Import demangled symbols from RBin \\
 % \\
+\texttt{cmd.bp} & command to run when a breakpoint is hit; \\ & e.g. \texttt{cmd.bp=!!}\textit{program} \\
 \texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
 % \\
 \texttt{dbg.follow.child} & continue tracing the child process on fork \\
 \texttt{dbg.slow} & show stack and regs in visual mode, in a slow but \\ & verbose (e.g. telescoping) mode \\
 % \\
-\texttt{io.cache} & enable cache for IO changes \\ & (AKA non-persistent write-mode) \\
+\texttt{io.cache} & enable cache for IO (=non-persistent write-mode) \\
 % \\
 \texttt{scr.utf8} & show nice UTF-8 chars instead of ANSI \\ & (Windows: switch code-page with \texttt{chcp 65001})\\
 \texttt{scr.utf8.curvy} & show curved UTF-8 corners (requires \texttt{scr.utf8}) \\
