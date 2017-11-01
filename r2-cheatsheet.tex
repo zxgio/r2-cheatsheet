@@ -237,9 +237,9 @@ Also: \texttt{e??search} for options
 
 \section{Writing: \texttt{w}}
 \begin{tabular}{@{}ll@{}}
-\texttt{wa} \textit{asm-instr} & assemble and write opcodes; for more instructions \\ &
-	the whole command must be quoted: \\ &
-\texttt{"wa} \textit{asm-instr$_1$}\texttt{;} \textit{asm-instr$_2$}\texttt{;} \ldots\texttt{"} \\
+\texttt{wa} \textit{asm-instr} & assemble+write opcodes; 
+	quote the whole command \\ &  for more instructions:
+\texttt{"wa} \textit{instr$_1$}\texttt{;} \textit{instr$_2$}\texttt{;} \ldots\texttt{"} \\
 \texttt{wao} \textit{\ldots} & replace current instruction; see \texttt{wao?} for details \\
 \texttt{w}[\texttt{z}] \textit{str} & write string \textit{str} [and append byte \texttt{\textbackslash x00}] \\
 \texttt{wx} \textit{hex-pairs} & write hex-pairs \\
