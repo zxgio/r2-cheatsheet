@@ -104,11 +104,11 @@ A single command can be applied to each element of a sequence by using \texttt{@
 You can filter command output by appending \texttt{\textasciitilde{}}[\texttt{!}]\textit{str}, to display only rows [not] containing string \textit{str}; e.g. \texttt{pdf\textasciitilde{}rdx} and \texttt{pdf\textasciitilde{}!rdx}. You can further filter by appending
 
 \begin{tabular}{@{}ll@{}}
-\texttt{:}\textit{r}	& to display row \textit{r} ($0\le r < \#\mathit{rows}$ or, backwards \\ & with: $-\#\mathit{rows}\le r \le -1)$ \\
-\texttt{[}$c_1[,c_2,\ldots]$\texttt{]}	& to display columns $c_1,c_2,\ldots$ ($0\le c_i < \#\mathit{cols}$) \\
-\texttt{:r[}$c_1,\ldots,c_n$\texttt{]}	& to display columns $c_1,\ldots,c_n$ of row $r$ \\
-\texttt{..} & to pipe the output into less-like viewer \\
-\texttt{...} & to pipe the output into HUD viewer \\
+\texttt{:}\textit{r}	& display row \textit{r} ($0\le r < \#\mathit{rows}$ or, backwards \\ & with: $-\#\mathit{rows}\le r \le -1)$ \\
+\texttt{[}$c_1[,c_2,\ldots]$\texttt{]}	& display columns $c_1,c_2,\ldots$ ($0\le c_i < \#\mathit{cols}$) \\
+\texttt{:r[}$c_1,\ldots,c_n$\texttt{]}	& display columns $c_1,\ldots,c_n$ of row $r$ \\
+\texttt{..} & pipe output into less-like viewer \\
+\texttt{...} & pipe into HUD, which filters space separated strings \\
 \end{tabular}
 
 Examples: \texttt{afl\textasciitilde{}[0]}, \texttt{afl\textasciitilde{}malloc[0]}, \texttt{pdf\textasciitilde{}:2} and \texttt{pdf\textasciitilde{}mov:2}
