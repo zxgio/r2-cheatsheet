@@ -246,8 +246,8 @@ Also: \texttt{e??search} for options
 \texttt{wc} & list pending changes (see variable \texttt{io.cache}) \\
 % \texttt{wc*} & list pending changes in Radare commands \\
 \texttt{wtf} [\textit{file}] [\textit{size}] & write to file \\
-\texttt{wopO} \textit{value} & find the offset of \textit{value} inside a De Bruijn pattern; \\
-	& to produce a pattern: \texttt{ragg2 -r -P} \textit{size} \\
+\texttt{wopO} \textit{v} & print offset of \textit{v} inside De Bruijn pattern; equiv. to\\
+	& \texttt{ragg2 -q }\textit{v}; to produce a pattern: \texttt{ragg2 -r -P} \textit{size} \\
 \end{tabular}
 
 \section{Analysis (functions and syscalls): \texttt{a}}
