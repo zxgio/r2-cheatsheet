@@ -179,7 +179,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{asm.pseudo} & enable pseudo-code syntax \\ 
 \texttt{asm.bytes} & display bytes of each instruction \\
 \texttt{asm.describe} & show opcode description \\
-\texttt{asm.cmtright} & comments at right of disassembly if they fit \\
+\texttt{asm.cmt.right} & comments at right of disassembly if they fit \\
 \texttt{asm.emu} & run ESIL emulation analysis on disasm \\
 \texttt{asm.demangle} & Show demangled symbols in disasm \\
 % \\
@@ -327,6 +327,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{dbt} & display backtrace (check \texttt{dbg.btdepth}/\texttt{btalgo}) \\
 \texttt{drx} & hardware breakpoints \\
 \texttt{dm} & list memory maps; the asterisk shows where \\ & the current offset is \\
+\texttt{dmh} & show heap allocation (see: \texttt{dmh?}) \\
 \texttt{dmm} & list modules (libraries, loaded binaries) \\
 \texttt{dmi} [\textit{addr}|\textit{lib}] [\textit{sym}] & list symbols of target lib \\
 \texttt{dmp} & change page permissions (see: \texttt{dmp?}) \\
@@ -413,7 +414,7 @@ Command \texttt{V} enters \emph{visual mode}.
 \end{tabular}
 \subsection{Debugging (in Visual Mode)}
 \begin{tabular}{@{}ll@{}}
-\texttt{b} or \texttt{F2} & toggle breakpoint \\
+\texttt{B} (\texttt{b} in older versions) or \texttt{F2} & toggle breakpoint \\
 \texttt{F4} & run to cursor \\
 \texttt{s} or \texttt{F7} & step-into \\
 \texttt{S} or \texttt{F8} & step-over \\
