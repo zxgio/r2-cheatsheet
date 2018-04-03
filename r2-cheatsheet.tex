@@ -176,7 +176,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \end{tabular}
 \subsubsection{Some variables}
 \begin{tabular}{@{}ll@{}}
-\texttt{asm.pseudo} & enable pseudo-code syntax \\ 
+\texttt{asm.pseudo} & enable pseudo-code syntax \\
 \texttt{asm.bytes} & display bytes of each instruction \\
 \texttt{asm.describe} & show opcode description \\
 \texttt{asm.cmt.right} & comments at right of disassembly if they fit \\
@@ -189,6 +189,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{cmd.stack} & command to display the stack in visual \\ & debug mode (Eg: \texttt{px 32}) \\
 % \\
 \texttt{dbg.follow.child} & continue tracing the child process on fork \\
+\texttt{dbg.funcarg} & display function arguments in visual mode \\
 \texttt{dbg.slow} & show stack and regs in visual mode, in a slow but \\ & verbose (e.g. telescoping) mode; check \emph{column mode} \\
 \texttt{dbg.trace} & trace program execution (check also \texttt{asm.trace}) \\
 % \\
@@ -199,7 +200,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \texttt{scr.nkey} & select seek mode; affects \texttt{n}/\texttt{N} in visual mode \\
 \texttt{scr.breaklines} & break lines in Visual instead of truncating them \\
 \texttt{scr.html} & disassembly outputs in HTML syntax \\
-\texttt{scr.wheel} & enables mouse-wheel in visual mode
+%\texttt{scr.wheel} & enables mouse-wheel in visual mode
 \end{tabular}
 % \subsubsection{Example: my \texttt{\textasciitilde{}/.radare2rc}}
 % \begin{verbatim}
@@ -238,7 +239,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 
 \section{Writing: \texttt{w}}
 \begin{tabular}{@{}ll@{}}
-\texttt{wa} \textit{asm-instr} & assemble+write opcodes; 
+\texttt{wa} \textit{asm-instr} & assemble+write opcodes;
 	quote the whole command \\ &  for more instructions:
 \texttt{"wa} \textit{instr$_1$}\texttt{;} \textit{instr$_2$}\texttt{;} \ldots\texttt{"} \\
 \texttt{wao} \textit{\ldots} & replace current instruction; see \texttt{wao?} for details \\
