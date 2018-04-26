@@ -353,16 +353,16 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \section{Printing: \texttt{p}}
 \begin{tabular}{@{}ll@{}}
 \texttt{ps} [\texttt{@} \textit{addx}]& print C-string at \textit{addx} (or current position) \\
+\texttt{psb} [\texttt{@} \textit{addx}]& print C-strings at \textit{addx} (or current block) \\
 \texttt{pxr} [\textit{n}] [\texttt{@} \textit{addx}] & print with references to flags/code (telescoping) \\
 \texttt{px} [\textit{n}] [\texttt{@} \textit{addx}] & hexdump --- note: \texttt{x} is an alias for \texttt{px}\\
 \texttt{px}$\{$\texttt{h}$|$\texttt{w}$|$\texttt{q}$\}$ \ldots & hexdump in 16/32/64 bit words \\
 \texttt{px}$\{$\texttt{H}$|$\texttt{W}$|$\texttt{Q}$\}$ \ldots & as the previous one, but one per line \\
 \texttt{pxl} [\textit{n}] [\texttt{@} \textit{addx}] & display \textit{n} rows of hexdump \\
 \texttt{px/}\textit{fmt} [\texttt{@} \textit{addx}] & gdb-style printing \textit{fmt} (in gdb see: \texttt{help x} \\ & from r2: \texttt{!!gdb -q -ex 'help x' -ex quit}) \\
-\texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions \\
+\texttt{pd} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions (backwards if $n<0$) \\
 \texttt{p8} [\textit{n}] [\texttt{@} \textit{addx}] & print bytes \\
 \texttt{pD} [\textit{n}] [\texttt{@} \textit{addx}] & disassemble \textit{n} bytes \\
-\texttt{pd} \textit{-n}  [\texttt{@} \textit{addx}] & disassemble \textit{n} instructions backwards \\
 \texttt{pdf} [\texttt{@} \textit{fn-name}] & disassemble function \textit{fn-name} \\
 \texttt{pc}[\texttt{p}] [\textit{n}] [\texttt{@} \textit{addx}] & dumps in C [Python] format \\
 \texttt{*} \textit{addx} [\texttt{=}\textit{value}] & shortcut for reading/writing at \textit{addx} \\
