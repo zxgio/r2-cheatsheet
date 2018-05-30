@@ -341,8 +341,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{"td\ }\textit{C-type-def}\texttt{"} & define a new type \\
 \texttt{t} \textit{t-name} & show type \textit{t-name} in \texttt{pf} syntax \\
 \texttt{.t }\textit{t-name} \texttt{@} \textit{addx} & display the value (of type \textit{t-name}) at \textit{addx} \\
-\texttt{t} & list (base?) types \\
-\texttt{te} / \texttt{ts} / \texttt{tu} & list enums/structs/unions \\
+\texttt{t}[\texttt{e}/\texttt{s}/\texttt{u}] & list all-types/enums/structs/unions \\
 \texttt{to} \textit{file} & parse type information from C header file \\
 \texttt{tl} \textit{t-name} & link \textit{t-name} to current address \\
 \texttt{tl} \textit{t-name} \texttt{=} \textit{addx} & link \textit{t-name} to address \textit{addx} \\
@@ -367,6 +366,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{pc}[\texttt{p}] [\textit{n}] [\texttt{@} \textit{addx}] & dumps in C [Python] format \\
 \texttt{*} \textit{addx} [\texttt{=}\textit{value}] & shortcut for reading/writing at \textit{addx} \\
 \texttt{pf} \textit{fmt} $a_1 [,a_2,\dots]$ & formatted print, see \texttt{pf??} and \texttt{pf???} \\
+\texttt{pa}[\texttt{d}] \ldots & assemble-to/disassemble-from hex-pairs \\
 \end{tabular}
 
 \section{Information: \texttt{i} (and \texttt{S})}
@@ -409,7 +409,8 @@ Command \texttt{V} enters \emph{visual mode}.
 \texttt{u} / \texttt{U} & undo / redo \\
 \texttt{o} & go/seek to given offset \\
 \texttt{0} (\emph{zero})& seek to beginning of current function \\
-\textit{d} (a non-zero digit) & jump to the target marked \texttt{[}\textit{d}\texttt{]} \\
+\textit{d} (a non-zero digit) & jump to the jmp/lea-hint marked \texttt{[}\textit{d}\texttt{]} \\
+\texttt{r} & toggle jmp/lea hints \\
 \texttt{m}\textit{l} (a letter) & mark the spot with letter \textit{l} \\
 \texttt{'}\textit{l} & jump to mark \textit{l} \\
 \texttt{n} / \texttt{N} & jump to next/previous function \\
