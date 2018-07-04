@@ -256,6 +256,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \section{Analysis (functions and syscalls): \texttt{a}}
 \begin{tabular}{@{}ll@{}}
 \texttt{aaa} & analyze (\texttt{aa}) and auto-name functions \\
+\texttt{aod} \textit{opcode} & description of \textit{opcode} (eg. \texttt{aod jle}) \\
 \texttt{afl}[\texttt{l}] & list functions [with details] \\
 \texttt{afi} \textit{fn-name} & show verbose info for \textit{fn-name} \\
 \texttt{afn} \textit{new-name} \textit{addx} & (re)name function at address \textit{addx} \\
@@ -270,6 +271,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{axt} \textit{addx} & find data/code references to \textit{addx} \\
 \texttt{ahi} $\{$\texttt{b}$|$\texttt{d}$|$\texttt{h}$|$\texttt{o}$|$\texttt{r}$|$\texttt{S}$|$\texttt{s}$\}$ \texttt{@} \textit{addx} & define binary/decimal/hex/octal/IP/ \\ & syscall/string base for immediate \\
 \end{tabular}
+\vspace{-4mm}
 \subsection{ESIL: \texttt{ae}}
 \begin{tabular}{@{}ll@{}}
 \texttt{aeim} & initialize ESIL VM stack \\
@@ -278,6 +280,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{aes}[\texttt{b}|\texttt{o}] & perform emulated debugger step [back|over] \\
 \texttt{aesu} \textit{addr} & step until given address \\
 \end{tabular}
+\vspace{-1mm}
 \subsection{Graphviz/graph code: \texttt{ag}}
 \begin{tabular}{@{}ll@{}}
 \texttt{ag} \textit{addr} & output graphviz code (BB at \textit{addr} and children) \\ &  E.g. view the function graph with: \texttt{ag \$\$ | xdot -} \\
@@ -309,8 +312,6 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 
 \section{Debugging: \texttt{d}}
 \begin{tabular}{@{}ll@{}}
-\texttt{?d} \textit{opcode} & description of \textit{opcode} (eg. \texttt{?d jle}) \\
-% & BUG (?): this doesn't work on Windows \\
 \texttt{dc} & continue (or start) execution \\
 \texttt{dcu} \textit{addx} & continue until \textit{addx} is reached \\
 \texttt{dcs} [\textit{name}] & continue until the next syscall [\textit{name}] \\
@@ -323,8 +324,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{drt} \textit{type} & list registers of type \textit{type} and their values \\
 \texttt{db} & list breakpoints \\
 \texttt{db}[\texttt{-}]\ \textit{addx} & add [remove] breakpoint \\
-\texttt{doo} [\textit{args}] & (re)start debugging \\
-\texttt{ood} & synonym for \texttt{doo} \\
+\texttt{doo} [\textit{args}] & (re)start debugging; synonym of \texttt{ood}\\
 \texttt{ds}[\texttt{o}] & step into [over]\\
 \texttt{dbt} & display backtrace (check \texttt{dbg.btdepth}/\texttt{btalgo}) \\
 \texttt{drx} & hardware breakpoints \\
