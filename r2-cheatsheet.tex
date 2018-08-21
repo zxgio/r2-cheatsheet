@@ -272,13 +272,13 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{ahi} $\{$\texttt{b}$|$\texttt{d}$|$\texttt{h}$|$\texttt{o}$|$\texttt{r}$|$\texttt{S}$|$\texttt{s}$\}$ \texttt{@} \textit{addx} & define binary/decimal/hex/octal/IP/ \\ & syscall/string base for immediate \\
 \end{tabular}
 \vspace{-4mm}
-\subsection{ESIL: \texttt{ae}}
+\subsection{ESIL code emulation: \texttt{ae}}
 \begin{tabular}{@{}ll@{}}
-\texttt{aeim} & initialize ESIL VM stack \\
+\texttt{aei}[\texttt{m}] & initialize ESIL VM state [stack] \\
 \texttt{aepc} \textit{addr} & change ESIL PC to \textit{addx} (\texttt{aeip} sets PC to curseek)\\
 \texttt{aer} \dots & handle ESIL registers like \texttt{dr} does \\
 \texttt{aes}[\texttt{b}|\texttt{o}] & perform emulated debugger step [back|over] \\
-\texttt{aesu} \textit{addr} & step until given address \\
+\texttt{aecu} \textit{addr} & continue until given address \\
 \end{tabular}
 \vspace{-1mm}
 \subsection{Graphviz/graph code: \texttt{ag}}
