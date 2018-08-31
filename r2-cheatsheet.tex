@@ -217,6 +217,7 @@ take a look at configuration variable \texttt{http.sandbox}.
 \section{Searching: \texttt{/}}
 \begin{tabular}{@{}ll@{}}
 \texttt{/ \textit{str}} & search for string \textit{str} \\
+\texttt{/c \textit{instr}} & search for instruction \textit{instr} \\
 \texttt{/x \textit{hstr}} & search for hex-string \textit{hstr} \\
 \texttt{/a \textit{asm-instr}} & assemble instruction and search for its bytes \\
 \texttt{/R}[\texttt{/}]\ \textit{opcode} & find ROP gadgets [with r.e.] containing opcode; \\ & see: \url{http://radare.today/posts/ropnroll/} \\
@@ -232,8 +233,7 @@ Also: \texttt{e search.in=??} and \texttt{e??search} for options
 \texttt{s..} \textit{hex} & changes least-significant part of current address to \textit{hex}\\
 \texttt{s+} \textit{n} and \texttt{s-} \textit{n} & seek \textit{n} bytes forward/backward \\
 \texttt{s++} and \texttt{s-{}-} & seek block-size bytes forward/backward \\
-\texttt{s-} & undo seek \\
-\texttt{s+} & redo seek \\
+\texttt{s-} and \texttt{s+} & undo/redo seek \\
 \texttt{s=} & list seek history \\
 \texttt{s*} & list seek history as r2-commands \\
 \end{tabular}
